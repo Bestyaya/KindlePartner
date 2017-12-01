@@ -3,7 +3,7 @@
   type="WEB"
   name="MyBookStore"
   id="myeclipse.1508133509567"
-  context-root="/RriverManager"
+  context-root="/MyBookStore"
   j2ee-spec="5.0"
   archive="MyBookStore.war">
   <attributes>

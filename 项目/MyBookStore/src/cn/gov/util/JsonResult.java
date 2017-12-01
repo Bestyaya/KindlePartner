@@ -2,9 +2,9 @@ package cn.gov.util;
 
 public class JsonResult {
 
-	public boolean success; // ×´Ì¬Âë
-	public String message; // ·µ»ØĞÅÏ¢
-	public Object data; // ·µ»ØÊı¾İ
+	public boolean success; //çŠ¶æ€
+	public String message; //ä¿¡æ¯
+	public Object data; // æ•°æ®
 
 	public boolean isSuccess() {
 		return success;

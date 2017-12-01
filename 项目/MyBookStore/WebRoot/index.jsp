@@ -12,6 +12,8 @@
 	rev="stylesheet" />
 </head>
 <body>
-<jsp:forward page="login.jsp"></jsp:forward>
+<div>
+<h1>欢迎来到主界面</h1>
+</div>
 </body>
 </html>

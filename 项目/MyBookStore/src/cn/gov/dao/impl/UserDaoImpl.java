@@ -13,7 +13,8 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	public User getUser(User user) {
 		// TODO Auto-generated method stub
 		
-		String hql =  String.format("from User where loginid = '%s'",user.getUsername());
+		String hql =  String.format("from User where username = '%s' and password " +
+				"= '%s'",user.getUsername(),user.getPassword());
 		Session session = HibernateSessionFactory.getSession();
 		Query q = session.createQuery(hql);
 		

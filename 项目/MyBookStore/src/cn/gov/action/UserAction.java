@@ -15,19 +15,21 @@ public class UserAction {
     public UserService getUserService() {
 		return userService;
 	}
-	public void setUserService(UserService userService) {
+    public void setUserService(UserService userService) {
 		this.userService = userService;
-	}
+    }
     
     public User getUser() {
 		return user;
-	}
-	public void setUser(User user) {
+    }
+    
+    public void setUser(User user) {
 		this.user = user;
-	}
-	public String getJson() {
-		return json;
-	}
+    }
+    
+    public String getJson() {
+            return json;
+    }
 	
 	public void setJson(String json) {
 		this.json = json;
@@ -36,6 +38,7 @@ public class UserAction {
 	public JsonResult getJsonResult() {
 		return jsonResult;
 	}
+	
 	public void setJsonResult(JsonResult jsonResult) {
 		this.jsonResult = jsonResult;
 	}
@@ -48,6 +51,9 @@ public class UserAction {
 	public String login()
 	{
 		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+		
+		jsonResult = new JsonResult();  //实例化JsonResult
 		
 		boolean ok = userService.login(user); //判断是否登录成功
 		if(ok)
@@ -58,7 +64,7 @@ public class UserAction {
 		else
 		{
 			jsonResult.setSuccess(false);
-			jsonResult.setMessage("登录失败！");
+			jsonResult.setMessage("用户名或密码不匹配，登录失败！");
 		}
 		
 		return "jsonResult";

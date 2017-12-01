@@ -19,10 +19,10 @@ public class UserServiceImpl implements UserService {
 	public boolean login(User user) {
 		// TODO Auto-generated method stub
 		
-		if(userDao.getUser(user) != null)
-			return true;
-		
-		return false;
+	       if(userDao.getUser(user) != null) 
+	               return true;
+	       
+	       return false;
 	}
 
 }
