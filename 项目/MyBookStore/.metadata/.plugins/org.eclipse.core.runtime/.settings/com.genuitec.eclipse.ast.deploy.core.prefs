@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+myeclipseTomcatServer.RriverManager.IEARProjectName=
+myeclipseTomcatServer.RriverManager.altContextRoot=/RriverManager
+myeclipseTomcatServer.RriverManager.contextRoot=/RriverManager
+myeclipseTomcatServer.RriverManager.deployIsOverProject=false
+myeclipseTomcatServer.RriverManager.deploymentPath=C\:\\Users\\\u738B\u663A\u579A\\Desktop\\RiverManager\\.metadata\\.me_tcat\\webapps\\RriverManager
+myeclipseTomcatServer.RriverManager.isDeployed=true
+myeclipseTomcatServer.RriverManager.isExploded=true
+myeclipseTomcatServer.RriverManager.isUptoDate=true
+myeclipseTomcatServer.RriverManager.noFileCopy=false
+myeclipseTomcatServer.RriverManager.shouldBackup=false
+myeclipseTomcatServer.RriverManager.shouldOverwrite=false
+myeclipseTomcatServer.RriverManager.type=WebDeployment

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	    http://www.springframework.org/schema/aop
+	    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	    http://www.springframework.org/schema/tx
+	    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean name="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.UserServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.ZhuangServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.WarnServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.CoordinateServiceImpl.*(..))" />
+	</aop:config> <!-- 这里使用了set方法进行注入-->
+	<!-- 这里name只能定义为userDao，而不能是userDaoImpl，否则无法进行设值注入  -->
+	<!-- 这里是dao的bean -->
+	<bean name="userDao" class="cn.gov.dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="zhuangDao" class="cn.gov.dao.impl.ZhuangDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="warnDao" class="cn.gov.dao.impl.WarnDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean name="coordinateDao" class="cn.gov.dao.impl.CoordinateDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 这里是service的bean -->
+	<bean name="userService" class="cn.gov.service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean name="zhuangService" class="cn.gov.service.impl.ZhuangServiceImpl">
+		<property name="zhuangDao" ref="zhuangDao"></property>
+	</bean>
+	<bean name="warnService" class="cn.gov.service.impl.WarnServiceImpl">
+		<property name="warnDao" ref="warnDao"></property>
+	</bean>
+	<bean name="coordinateService" class="cn.gov.service.impl.CoordinateServiceImpl">
+		<property name="coordinateDao" ref="coordinateDao"></property>
+	</bean>
+	
+	<!-- 这里是action的bean -->
+	<bean name="userAction" class="cn.gov.action.UserAction">
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean name="zhuangAction" class="cn.gov.action.ZhuangAction">
+		<property name="zhuangService" ref="zhuangService"></property>
+	</bean>
+	<bean name="warnAction" class="cn.gov.action.WarnAction">
+		<property name="warnService" ref="warnService"></property>
+	</bean>
+	<bean name="coordinateAction" class="cn.gov.action.CoordinateAction">
+		<property name="coordinateService" ref="coordinateService"></property>
+	</bean>
+</beans>

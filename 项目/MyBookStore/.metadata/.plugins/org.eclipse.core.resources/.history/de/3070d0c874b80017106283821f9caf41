@@ -1,0 +1,84 @@
+package cn.gov.service.impl;
+
+import java.util.List;
+
+import cn.gov.dao.WarnDao;
+import cn.gov.entity.Warn;
+import cn.gov.service.WarnService;
+import cn.gov.util.Pager;
+
+public class WarnServiceImpl implements WarnService {
+        private WarnDao warnDao;
+
+        public WarnDao getWarnDao() {
+                return warnDao;
+        }
+
+        public void setWarnDao(WarnDao warnDao) {
+                this.warnDao = warnDao;
+        }
+        
+        public int deleteWarn(Warn warn)
+        {
+                return warnDao.deleteWarn(warn);
+        }
+
+        public int deleteByPrimaryKey(Integer id) {
+                return warnDao.deleteByPrimaryKey(id);
+        }
+
+        public List<Warn> getByPager(Pager pager) {
+                return warnDao.getByPager(pager);
+        }
+
+        public int getCount() {
+                return warnDao.getCount();
+        }
+
+        public int insert(Warn record) {
+                return warnDao.insert(record);
+        }
+
+        public int insertSelective(Warn record) {
+                return warnDao.insertSelective(record);
+        }
+
+        public List<Warn> selectAll() {
+                return warnDao.selectAll();
+        }
+
+        public Warn selectByPrimaryKey(Integer id) {
+                return warnDao.selectByPrimaryKey(id);
+        }
+
+        public List<Warn> selectClose() {
+                return warnDao.selectClose();
+        }
+
+        public int selectCount(String whereCondition) {
+                return warnDao.selectCount(whereCondition);
+        }
+
+        public List<Warn> selectTime(String whereCondition, Pager pager) {
+                return warnDao.selectTime(whereCondition, pager);
+        }
+
+        public int updateByPrimaryKey(Warn record) {
+                return warnDao.updateByPrimaryKey(record);
+        }
+
+        public int updateByPrimaryKeySelective(Warn record) {
+                return warnDao.updateByPrimaryKeySelective(record);
+        }
+
+        public int updateState(Integer id) {
+                return warnDao.updateState(id);
+        }
+        
+      //按查询条件查询所有的警告，用于在地图上做显示
+        public List<Warn> selectByWhere(String where){   
+                return warnDao.selectByWhere(where);
+        }
+
+
+}

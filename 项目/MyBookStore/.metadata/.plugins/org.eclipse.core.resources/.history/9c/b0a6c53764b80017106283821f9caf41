@@ -1,0 +1,119 @@
+package cn.gov.dao.impl;
+
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import cn.gov.dao.HibernateSessionFactory;
+import cn.gov.dao.WarnDao;
+import cn.gov.entity.Warn;
+import cn.gov.util.Pager;
+
+public class WarnDaoImpl extends HibernateDaoSupport implements WarnDao {
+
+        public int deleteWarn(Warn warn)
+        {
+                getHibernateTemplate().delete(warn);
+                return warn.getId();
+        }
+        
+        public int deleteByPrimaryKey(Integer id) {
+                String hql = String.format("delete from Warn where id=%s",id);
+                Query q = getSession().createQuery(hql);
+                return q.executeUpdate();
+        }
+
+        @SuppressWarnings("unchecked")
+        public List<Warn> getByPager(Pager pager) {
+                String hql = "from Warn";
+                Query q = getSession().createQuery(hql);
+                q.setFirstResult((pager.getIndex() - 1) * pager.getSize());
+                q.setMaxResults(pager.getSize());
+                return q.list();
+        }
+
+        public int getCount() {
+                String hql = "from Warn";
+                Query q = getSession().createQuery(hql);
+                int count = q.list().size();
+                return count;
+        }
+
+        public int insert(Warn record) {
+                Session session= HibernateSessionFactory.getSession();
+                Transaction tran = session.beginTransaction();
+                session.save(record);
+                System.pout.println(1);
+                tran.commit();
+                System.out.println(1);
+                session.close();
+                return record.getId();
+        }
+
+        public int insertSelective(Warn record) {
+                getHibernateTemplate().save(record);
+                return record.getId();
+        }
+
+        @SuppressWarnings("unchecked")
+        public List<Warn> selectAll() {
+                String hql = "from Warn";
+                Query q = getSession().createQuery(hql);
+                return q.list();
+        }
+
+        public Warn selectByPrimaryKey(Integer id) {
+                String hql = "from Warn";
+                Query q = getSession().createQuery(hql);
+                q.setInteger(0, id);
+                return (Warn) q.uniqueResult();
+        }
+
+        public List<Warn> selectClose() {
+                // TODO Auto-generated method stub
+                return null;
+        }
+
+        public int selectCount(String whereCondition) {
+                String hql = "from Warn " + whereCondition;
+                Query q = getSession().createQuery(hql);
+                return q.list().size();
+        }
+
+        @SuppressWarnings("unchecked")
+        public List<Warn> selectTime(String whereCondition, Pager pager) {
+                String hql = "from Warn " + whereCondition;
+                Query q = getSession().createQuery(hql);
+                q.setFirstResult((pager.getIndex() - 1) * pager.getSize());
+                q.setMaxResults(pager.getSize());
+                return q.list();
+        }
+
+        public int updateByPrimaryKey(Warn record) {
+            return 0;
+        }
+
+        public int updateByPrimaryKeySelective(Warn record) {
+                // TODO Auto-generated method stub
+                getHibernateTemplate().update(record);
+                return record.getId();
+
+        }
+
+        public int updateState(Integer id) {
+                String hql = String.format("update Warn set state=2 where id=%s",id);
+                Query q = getSession().createQuery(hql);
+                return q.executeUpdate();
+        }
+        
+        @SuppressWarnings("unchecked")
+        public List<Warn> selectByWhere(String where){
+                String hql = "from Warn "+where;
+                Query q = getSession().createQuery(hql);
+                return q.list();
+        }
+
+}

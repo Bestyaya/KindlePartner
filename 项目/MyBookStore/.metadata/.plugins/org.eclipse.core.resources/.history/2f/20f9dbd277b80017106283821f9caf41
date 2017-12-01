@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<%@ include file="base/stylebase.jsp"%>
+<script type="text/javascript"
+	src="http://api.map.baidu.com/api?v=2.0&ak=UM4jTlWq8EHvSH4oVlf4W1109qbyrWId"></script>
+<!--加载鼠标绘制工具-->
+<script type="text/javascript"
+	src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+<link rel="stylesheet"
+	href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+<!--加载检索信息窗口-->
+<script type="text/javascript"
+	src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+<link rel="stylesheet"
+	href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+<title>河道管理系统</title>
+<style type="text/css">
+body,html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: "微软雅黑";
+}
+
+#allmap {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#result {
+	width: 100%;
+	font-size: 12px;
+}
+
+dl,dt,dd,ul,li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+p {
+	font-size: 12px;
+}
+
+dt {
+	font-size: 14px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	border-bottom: 1px dotted #000;
+	padding: 5px 0 5px 5px;
+	margin: 5px 0;
+}
+
+dd {
+	padding: 5px 0 0 5px;
+}
+
+li {
+	line-height: 28px;
+}
+</style>
+</head>
+<body>
+
+	<div id="toolbar">
+		<div id="search-form"
+			style="margin: 3px auto; height: 24px; line-height: 24px">
+			起始时间: <input class="easyui-datetimebox" id="dateStart"> 结束时间:
+			<input class="easyui-datetimebox" id="dateEnd"> <a id="serch"
+				onclick="refreshGrid()" class="easyui-linkbutton"
+				href="javascript:void(0)" iconCls="icon-search">查询</a>
+		</div>
+	</div>
+
+	<div id="allmap" style="overflow:hidden;zoom:1;position:relative;">
+		<div id="map"
+			style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;"></div>
+	</div>
+
+	<div id="add_marker" class="easyui-dialog"
+		style="width: 380px;height: 250px;padding: 10px;left: 30%;top: 30%;"
+		closed="true" buttons="#dlg-buttons">
+		<form id="fm" method="post" enctype="multipart/form-data">
+			<table align="center"
+				style="border-collapse:separate; border-spacing:0px 10px;">
+				<tr>
+					<td class="label"><span>桩名称:</span></td>
+					<td><input id="Name" name="zhuang.name" class="easyui-textbox"
+						required="true" /></td>
+				</tr>
+				<tr>
+					<td class="label"><span>经度:</span></td>
+
+					<td><input id="Longitude" name="zhuang.longitude"
+						class="easyui-textbox" required="true" /></td>
+				</tr>
+				<tr>
+					<td class="label"><span>纬度:</span></td>
+					<td><input id="Latitude" name="zhuang.latitude"
+						class="easyui-textbox" required="true" /></td>
+				</tr>
+				<tr>
+					<td>图片:</td>
+					<td><input id="file" type="file" name="image"
+						onchange="fileChange(this);"
+						data-options="prompt:'请选择图片', buttonText:'&nbsp;&nbsp;&nbsp;&nbsp;选&nbsp;&nbsp;择&nbsp;&nbsp;&nbsp;&nbsp;'"
+						style="width:280px"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" id="btn_charge" class="easyui-linkbutton"
+			iconCls="icon-ok" onclick="addMarkerToData()">添加</a> <a
+			href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-cancel" onclick="cancleAddmarker()">取消</a>
+	</div>
+
+	<div id="add_line" class="easyui-dialog"
+		style="width: 300px;height: 220px;padding: 10px;left: 30%;top: 30%;"
+		closed="true" buttons="#dlg">
+		<form id="form1" method="post">
+			<table align="center"
+				style="border-collapse:separate; border-spacing:0px 10px;">
+				<tr>
+					<td class="label"><span>坐标值:</span></td>
+					<td><input id="Coordinate" name="coordinate.coordinate"
+						class="easyui-textbox" required="true" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div id="dlg">
+		<a href="javascript:void(0)" id="btn_addline"
+			class="easyui-linkbutton" iconCls="icon-ok" onclick="submitForm()">添加</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-cancel" onclick="cancleAddmarker()">取消</a>
+	</div>
+
+	<script type="text/javascript">
+    //限制文件上传只能是图片
+    function fileChange(target) {
+        var name = target.value;
+        var fileName = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
+        if (fileName != "jpg" && fileName != "jpeg" && fileName != "pdf" && fileName != "png" && fileName != "dwg" && fileName != "gif") {
+            alert("请选择图片格式文件上传(jpg,png,gif,dwg,pdf,gif等)！");
+            target.value = "";
+            return;
+        }
+    }
+    
+    var SEARCH_ALL = 'searchAll';
+    //加载数据库的坐标
+    var points = [];
+    var markIds = [];
+    var imgs = [];
+    var lables = [];
+    var marksId;
+    //实例化地图
+    var map = new BMap.Map('map');
+    var opts = {anchor: BMAP_ANCHOR_TOP_LEFT,mapTypes: [BMAP_NORMAL_MAP,BMAP_SATELLITE_MAP]};
+    
+    //20171013宋锋使用这段代码显示地图开始
+    var mylog = "118.097938";
+    var mylat = "37.356396";
+    var poi = new BMap.Point(mylog, mylat);
+    //20171013宋锋使用这段代码显示地图结束
+    
+    //添加地图类型控件
+    map.addControl(new BMap.MapTypeControl(opts));
+
+    map.centerAndZoom(poi, 13);
+    map.setCurrentCity("滨州");
+    map.enableScrollWheelZoom();
+    if('${param.mapType}'==="地图"){
+        map.setMapType(BMAP_NORMAL_MAP);
+    }else if('${param.mapType}'==="卫星"){
+        map.setMapType(BMAP_SATELLITE_MAP);
+    }
+    
+    //显示线和点
+    $(function () {   //页面载入时执行
+        $.ajax({
+            url: 'zhuang_listData',
+            success: function (result) {
+                var jsonData = result;
+                var a = jsonData.data;
+                for (var i in a) {
+                    points.push(new BMap.Point(a[i].longitude, a[i].latitude));
+                    markIds.push(a[i].id);
+                    imgs.push(a[i].file);
+                    lables.push(a[i].name)
+                }
+                for (var j = 0; j < points.length; j++) {
+                    var point = points[j];
+                    addMarker(point, markIds[j], imgs[j], lables[j]);
+                }
+            }
+        })
+    });
+    
+    function addMarker(point, id, imgs, lables) {
+        var myIcon = new BMap.Icon("images/aa.png", new BMap.Size(40, 30));
+        var marker = new BMap.Marker(point, {icon: myIcon});
+        
+        //点击桩时触发此事件
+        marker.addEventListener("click", function (e) {
+            marksId = id;
+
+            var html = [];
+
+            if (imgs !== null) {
+                html.push("<div style='width:300px;height:300px;text-align:center;'>");
+                html.push("<h4 style='margin:0 0 5px 0;padding:0.2em 0'>提示</h4>");
+                html.push("<img style='margin:4px' id='imgDemo' src='upload/zhuang/" + imgs + "' width='280' height='300' title='桩'/>");
+            }else {
+                html.push("<div style='width:300px;text-align:center;'>");
+                html.push("<h4 style='margin:0 0 5px 0;padding:0.2em 0'>提示</h4>");
+            }
+            html.push("<input type='button' value='删除' onclick='deletePoint()'>");
+            html.push("<br/>");
+            html.push("</div>");
+            var inWindow = new BMap.InfoWindow(html.join(""));  // 创建信息窗口对象
+            this.openInfoWindow(inWindow);
+            inWindow.redraw(); //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+        });
+        map.addOverlay(marker);
+        var label = new BMap.Label(lables, {offset: new BMap.Size(20, -10)});
+        marker.setLabel(label);
+    }
+    
+    //删除桩点
+    function deletePoint() {
+        $.messager.confirm('Confirm', '你确定要删除这个桩吗?', function (r) {
+            if (r) {
+                var md = marksId;
+                $.post('zhuang_deletePost', {"zhuang.id": md}, function (result) {
+                    if (result.success) {
+                        location.href = "add.jsp";
+                    } else {
+                        $.messager.alert("错误", "操作失败！" + result.message, "error");
+                    }
+                }, 'json');
+            }
+        });
+    }
+    
+    //显示河道
+    var linePoints = [];
+    var coordinate = [];
+    var strs = [];
+    var str = [];
+    var lineId = [];
+    $(function () {   //页面载入时执行
+        $.ajax({
+            url: 'coordinate_selectPost',
+            success: function (data) {
+                var jsonData = data;
+                var a = jsonData.data;
+                for (var i in a) {  //将每个数据库添加到数组中去
+                    linePoints.push(a[i].coordinate);
+                    lineId.push(a[i].id);
+                }
+                for (var j = 0; j < linePoints.length; j++) {  //针对每条记录画线 
+                    var point = linePoints[j];
+                    addLine(point, lineId[j]);    //调用画线的方法
+                }
+            }
+        })
+    });
+    
+    //添加线
+    function addLine(point, id) {
+        strs = point.split("|");
+        for (var s = 0; s < strs.length; s++) {
+            str = strs[s].split(",");
+            coordinate.push(new BMap.Point(str[0], str[1]));
+        }
+        var polyline = new BMap.Polyline(coordinate
+            , {strokeColor: "red", strokeWeight: 5, strokeOpacity: 0.5});   //创建折线
+        coordinate.length = 0;
+        map.addOverlay(polyline);   //增加折线
+        polyline.addEventListener("click", function () {
+            deleteLine(id);
+        });
+    }
+    
+     //删除河道
+    function deleteLine(marksId) {                                   
+        $.messager.confirm('删除确认', '您确定要删除这条折线吗?',
+            function (r) {
+                if (r) {
+                    var md = marksId;  
+                    $.post('coordinate_deletePost', {"coordinate.id": md}, function (result) {
+                        if (result.success) {
+                            location.href = "add.jsp";
+                        } else {
+                            $.messager.alert("错误", "操作失败！" + result.message, "error");
+                        }
+                    }, 'json');
+                }
+            });
+    }
+    
+    //实例化鼠标绘制工具
+    var overlays = [];
+    var polylinecomplete = function (e, overlay) {
+        overlays.push(overlay);
+        getPoint();
+
+        $('#add_line').dialog('open').dialog('center').dialog('setTitle', '添加坐标值');
+
+    };
+    var myIcon = new BMap.Icon("images/aa.png", new BMap.Size(40, 30));
+    var styleOptions = {
+        icon: myIcon,
+        strokeColor: "red",    //边线颜色。
+        fillColor: "red",      //填充颜色。当参数为空时，圆形将没有填充效果。
+        strokeWeight: 3,       //边线的宽度，以像素为单位。
+        strokeOpacity: 0.8,	   //边线透明度，取值范围0 - 1。
+        fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。
+        strokeStyle: 'solid' //边线的样式，solid或dashed。
+    };
+    var drawingManager = new BMapLib.DrawingManager(map, {
+        isOpen: false, //是否开启绘制模式
+        enableDrawingTool: true, //是否显示工具栏
+
+
+        drawingToolOptions: {
+            anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+            offset: new BMap.Size(5, 5), //偏离值
+            drawingModes: [BMAP_DRAWING_MARKER, BMAP_DRAWING_POLYLINE],
+            drawingTypes: []
+        },
+
+        polylineOptions: styleOptions,//线的样式
+        markerOptions: styleOptions
+
+    });
+    drawingManager.addEventListener('polylinecomplete', polylinecomplete);
+
+	 //得到坐标值
+    function getPoint() {                                         
+        var f;
+        f = null;
+        for (var i = 0; i < overlays.length; i++) {
+            var overlay = overlays[i].getPath();
+
+            for (var j = 0; j < overlay.length; j++) {
+                var grid = overlay[j];
+
+                if (j == overlay.length - 1) {
+
+                    f = f + grid.lng + "," + grid.lat;
+                    break;
+                }
+                f = f + grid.lng + "," + grid.lat + "|";
+
+            }
+            $('#Coordinate').textbox('setValue', f);
+        }
+    }
+    
+    //添加桩点
+    var markercomplete = function (e, overlay) {
+        clearOldMarker();
+        overlays.push(overlay);
+        showAddMarkerDialog(e);
+    };
+    drawingManager.addEventListener("markercomplete", markercomplete);
+
+    var clearOldMarker = function () {
+        for (var i = 0; i < overlays.length; i++) {
+            map.removeOverlay(overlays[i]);
+        }
+        overlays.length = 0;
+    };
+    var showAddMarkerDialog = function (e) {
+        $('#Longitude').textbox('setValue', e.point.lng);
+        $('#Latitude').textbox('setValue', e.point.lat);
+        $('#add_marker').dialog('open').dialog('center').dialog('setTitle', '添加桩点');
+    };
+    var cancleAddmarker = function () {
+        clearOldMarker();
+        $('#add_marker').dialog('close');
+    };
+    
+     //添加桩点
+    var addMarkerToData = function () {                         
+        var Longitude = $("#Longitude").val();
+        var Latitude = $("#Latitude").val();
+        var name = $("#Name").val();
+        if (Longitude === null || Longitude === "") {
+            $.messager.alert("提示", "请选择经度", "error");
+            return;
+        }
+        if (Latitude === null || Latitude === "") {
+            $.messager.alert("提示", "请选择纬度", "error");
+            return;
+        }
+        if (name === null || name === "") {
+            $.messager.alert("提示", "请输入桩名称", "error");
+            return;
+        }
+
+        $('#fm').form('submit', {
+            url: "zhuang_addPost",
+            success: function (r) {    
+                $.messager.progress('close');
+                if (r === null) return;
+                r = $.parseJSON(r);
+                if (r.success) {
+                    $('#add_marker').dialog('close');
+                    $.messager.alert("提示", r.message, "info", function () {
+                        location.href = "zhuang_add?mapType="+map.getMapType().cf;
+                    });
+                } else {
+                    $.messager.alert("提示", r.message, "error");
+                    $('#fm').dialog('close');
+                }
+            }
+        });
+    };
+
+	//添加河道
+    function submitForm() {                                         //画线
+        var Coordinate = $("#Coordinate").val();
+
+        if (Coordinate === null || Coordinate === "") {
+            $.messager.alert("提示", "请选择经度", "error");
+            return;
+        }
+
+        $('#form1').form('submit', {
+            url: "coordinate_createPost",
+            type: "post",
+            success: function (r) {
+                $.messager.progress('close');
+                if (r === null) return;
+                r = $.parseJSON(r);
+                if (r.success) {
+                    $('#add_line').dialog('close');
+                    $.messager.alert("提示", r.message, "info", function () {
+                        location.href = "zhuang_add?mapType="+map.getMapType().cf;
+                    });
+                } else {
+                    $.messager.alert("提示", r.message, "error", window.location.reload());
+
+                }
+
+            }
+        });
+    }
+    
+    //显示标记为1的警报点
+    var markIdj = [];
+    var pointj = [];
+    var imagej = [];
+    var contentj = [];
+    var videoj = [];
+    var audioj = [];
+    var creatTimeArr = [];
+    var uploaderArr = [];
+    var markjId;
+    //从后台获取巡视过程中发现的问题
+    $(function () {
+        $.ajax({
+            url: 'warn_showData',
+            success: function (result) {
+                var a = result.data;
+                for (var item in a) {
+                    pointj.push(new BMap.Point(a[item].longitude, a[item].latitude));
+                    imagej.push(a[item].file);
+                    contentj.push(a[item].description);
+                    videoj.push(a[item].video);
+                    markIdj.push(a[item].id);
+                    audioj.push(a[item].audio);
+                    creatTimeArr.push(a[item].createtime);
+                    uploaderArr.push(a[item].uploaderName);
+                }
+                for (var j = 0; j < pointj.length; j++) {
+                    var pt = pointj[j];
+                    addMarker(pt, markIdj[j], contentj[j], imagej[j], videoj[j], audioj[j], creatTimeArr[j], uploaderArr[j]);
+                }
+
+                function addMarker(pt, id, description, image, video, audio, createtime, uploader) {
+                    var marker = new BMap.Marker(pt, 15);//创建标注
+                    marker.addEventListener("click", function () {
+                            markjId = id;
+                            var html = [];
+                            html.push("<div style='width:300px;height:300px;text-align:center;'>");
+                            html.push("<h4 style='margin:0 0 5px 0;padding:0.2em 0'>提示</h4>");
+                            if (image !== null) {
+                                html.push("<img style='margin:4px' id='imgDemo' src='/upload/warn/" + image + "' width='280' height='300'; title='警告'/><br/>");
+                            }else {
+                                html.push("<span></span><br/>");
+                                html.push("<span></span><br/>");
+                                html.push("<span></span><br/>");
+                            }
+                            html.push("<span>" + description + "</span><br/>");
+                            if (audio !== null) {
+                                html.push("<span>此信息附有音频<a href='/jsp/zhuang/audioPlay.jsp?audioAdress=/upload/warn/" + audio + "' target='_blank'>单击查看</a></span><br/>");
+                            }
+                            if (video !== null) {
+                                html.push("<span>此信息附有视频<a href='/jsp/zhuang/videoPlay.jsp?videoAdress=/upload/warn/" + video + "' target='_blank'>单击查看</a></span>");
+                            }
+                            html.push("<input type='button' value='关闭报警' onclick='closePoint()'>");
+                            html.push("<br/>");
+                            html.push("<span>上传人：" + uploader + "</span>");
+                            html.push("<br/>");
+                            html.push("<span>上传时间：" + createtime + "</span>");
+                            html.push("</div>");
+                            var inWindow = new BMap.InfoWindow(html.join(""));  // 创建信息窗口对象
+                            this.openInfoWindow(inWindow);
+                            document.getElementById('imgDemo').onload = function () {
+                                infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+                            }
+                        }
+                    );
+                    map.addOverlay(marker);
+                }
+            }
+        })
+    });
+    
+    //关闭警告点
+    function closePoint() {
+        $.messager.confirm('Confirm', '你确定关闭报警点吗?', function (r) {
+            if (r) {
+                var mk = markjId;
+                $.post('warn_updatePost', {"warn.id": mk}, function (result) {
+                    if (result.success) {
+                        location.href = "add.jsp";
+                    } else {
+                        $.messager.alert("错误", "操作失败！" + result.message, "error");
+                    }
+                }, 'json');
+            }
+        });
+    }
+    
+    //显示全部的警报点
+    $(function () {
+        if ('${param.router}' === SEARCH_ALL) {
+            $.ajax({
+                url: 'warn_showAllData',
+                success: function (result) {
+                    var jsonData = $.parseJSON(result);
+                    var a = jsonData.data;
+                    for (var i in a) {
+                    alert(1);
+                        pointj.push(new BMap.Point(a[i].longitude, a[i].latitude));
+                        imagej.push(a[i].file)
+                        contentj.push(a[i].description);
+                        videoj.push(a[i].video);
+                        markIdj.push(a[i].id);
+                        audioj.push(a[i].audio);
+                        creatTimeArr.push(a[i].createtime);
+                        uploaderArr.push(a[i].uploaderName);
+                    }
+                    for (var j = 0; j < pointj.length; j++) {
+                        var pt = pointj[j];
+                        addMarker(pt, markIdj[j], contentj[j], imagej[j], videoj[j], audioj[j], creatTimeArr[j], uploaderArr[j]);
+                    }
+
+                    function addMarker(pt, id, description, image, video, audio, createtime, uploader) {
+                        var marker = new BMap.Marker(pt, 15);//创建标注
+                        marker.addEventListener("click", function () {
+                            markjId = id;
+                            var html = [];
+                            html.push("<div style='width:300px;height:300px;text-align:center;'>");
+                            html.push("<h4 style='margin:0 0 5px 0;padding:0.2em 0'>提示</h4>");
+                            if (image !== null) {
+                                html.push("<img style='margin:4px' id='imgDemo' src='/upload/warn/" + image + "' width='280' height='300'; title='警告'/><br/>");
+                            }else {
+                                html.push("<span></span><br/>");
+                                html.push("<span></span><br/>");
+                                html.push("<span></span><br/>");
+                            }
+                            html.push("<span>" + description + "</span><br/>");
+                            if (audio !== null) {
+                                html.push("<span>此信息附有音频<a href='/jsp/zhuang/audioPlay.jsp?audioAdress=/upload/warn/" + audio + "' target='_blank'>单击查看</a></span><br/>");
+                            }
+                            if (video !== null) {
+                                html.push("<span>此信息附有视频<a href='/jsp/zhuang/videoPlay.jsp?videoAdress=/upload/warn/" + video + "' target='_blank'>单击查看</a></span>");
+                            }
+                            html.push("<input type='button' value='关闭报警' onclick='closePoint()'>");
+                            html.push("<br/>");
+                            html.push("<span>上传人：" + uploader + "</span>");
+                            html.push("<br/>");
+                            html.push("<span>上传时间：" + createtime + "</span>");
+                            html.push("</div>");
+                            var inWindow = new BMap.InfoWindow(html.join(""));  // 创建信息窗口对象
+                            this.openInfoWindow(inWindow);
+                            document.getElementById('imgDemo').onload = function () {
+                                infoWindow.redraw();
+                            }
+                        });
+                        map.addOverlay(marker);
+                    }
+                }
+            });
+        }
+    });
+    
+    //查询使用
+    function refreshGrid() {
+        var dateStart = $("#dateStart").datebox('getValue');
+        var dateEnd = $("#dateEnd").datebox('getValue');
+        map.clearOverlays();
+        $.ajax({
+            url: 'warn_refresh',
+            data: {"dateStartId": dateStart, "dateEndId": dateEnd},
+            dataType: "json",
+            type: 'post',
+            success: function (result) {
+                var a = result.data;
+                for (var i in a) {
+                    pointj.push(new BMap.Point(a[i].longitude, a[i].latitude));
+                    imagej.push(a[i].file)
+                    contentj.push(a[i].description);
+                    videoj.push(a[i].video);
+                    markIdj.push(a[i].id);
+                    audioj.push(a[i].audio);
+                    creatTimeArr.push(a[i].createtime);
+                    uploaderArr.push(a[i].uploaderName);
+                }
+                for (var j = 0; j < pointj.length; j++) {
+                    var pt = pointj[j];
+                    addMarker2(pt, markIdj[j], contentj[j], imagej[j], videoj[j], audioj[j], creatTimeArr[j], uploaderArr[j]);
+                }
+            }
+        });
+    }
+    
+    function addMarker2(pt, id, description, image, video, audio, createtime, uploader) {
+        var marker = new BMap.Marker(pt, 15);//创建标注
+        marker.addEventListener("click", function () {
+            var html = [];
+            html.push("<div style='width:300px;height:300px;text-align:center;'>");
+            html.push("<h4 style='margin:0 0 5px 0;padding:0.2em 0'>提示</h4>");
+            if (image !== null) {
+                html.push("<img style='margin:4px' id='imgDemo' src='/upload/warn/" + image + "' width='280' height='300'; title='警告'/><br/>");
+            }else {
+                html.push("<span></span><br/>");
+                html.push("<span></span><br/>");
+                html.push("<span></span><br/>");
+            }
+            html.push("<span>" + description + "</span><br/>");
+            if (audio !== null) {
+                html.push("<span>此信息附有音频<a href='/jsp/zhuang/audioPlay.jsp?audioAdress=/upload/warn/" + audio + "' target='_blank'>单击查看</a></span><br/>");
+            }
+            if (video !== null) {
+                html.push("<span>此信息附有视频<a href='/jsp/zhuang/videoPlay.jsp?videoAdress=/upload/warn/" + video + "' target='_blank'>单击查看</a></span>");
+            }
+            html.push("<input type='button' value='关闭报警' onclick='closePoint()'>");
+            html.push("<br/>");
+            html.push("<span>上传人：" + uploader + "</span>");
+            html.push("<br/>");
+            html.push("<span>上传时间：" + createtime + "</span>");
+            html.push("</div>");
+            var inWindow = new BMap.InfoWindow(html.join(""));  // 创建信息窗口对象
+            this.openInfoWindow(inWindow);
+            document.getElementById('imgDemo').onload = function () {
+                infoWindow.redraw();
+            }
+        });
+        map.addOverlay(marker);
+    }
+</script>
+</body>
+</html>

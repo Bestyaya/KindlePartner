@@ -1,0 +1,18 @@
+package cn.gov.service;
+
+import java.util.List;
+
+import cn.gov.entity.User;
+
+//这个接口定义了对用户的管理操作
+public interface UserService {
+	public int addUser(User item);   //添加用户
+	public int editUser(User item);  //修改用户
+	public int deleteUser(int id);    //删除用户
+	public User getUser(String loginid);  //根据loginid获得用户
+	public User login(String loginid, String password);     //登录
+	public int count();
+        public List<User> pageList(int pageNow, int pageSize);
+        public boolean checkLoginId(String loginid);
+	
+}

@@ -1,0 +1,39 @@
+package cn.gov.dao;
+
+import java.util.List;
+
+import cn.gov.entity.Warn;
+import cn.gov.util.Pager;
+
+public interface WarnDao {
+        
+        int deleteWarn(Warn warn);
+        
+        int deleteByPrimaryKey(Integer id);
+
+        int insert(Warn record);
+
+        int insertSelective(Warn record);
+
+        Warn selectByPrimaryKey(Integer id);
+
+        int updateByPrimaryKeySelective(Warn record);
+
+        int updateByPrimaryKey(Warn record);
+
+        List<Warn> selectAll();
+
+        List<Warn> selectClose();
+
+        int updateState(Integer id);
+
+        List<Warn> selectTime(String whereCondition, Pager pager);
+
+        List<Warn> getByPager(Pager pager);
+
+        int getCount();
+
+        List<Warn> selectByWhere(String where); 
+        
+        int selectCount(String whereCondition);
+}

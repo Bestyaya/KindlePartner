@@ -1,0 +1,193 @@
+package cn.gov.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.json.annotations.JSON;
+
+import cn.gov.entity.Warn;
+import cn.gov.service.WarnService;
+import cn.gov.util.JsonData;
+import cn.gov.util.JsonResult;
+import cn.gov.util.Pager;
+
+public class WarnAction {
+        private Warn warn;
+        private WarnService warnService;
+        private String json;
+        private JsonData jsonData;
+        private JsonResult jsonResult;
+
+        public Warn getWarn() {
+                return warn;
+        }
+
+        public void setWarn(Warn warn) {
+                this.warn = warn;
+        }
+
+        @JSON(serialize = false)
+        // 这句注解要使用，不对服务进行序列化，否则无法正常返回json
+        public WarnService getWarnService() {
+                return warnService;
+        }
+
+        public void setWarnService(WarnService warnService) {
+                this.warnService = warnService;
+        }
+
+        public String getJson() {
+                return json;
+        }
+
+        public void setJson(String json) {
+                this.json = json;
+        }
+
+        public JsonData getJsonData() {
+                return jsonData;
+        }
+
+        public void setJsonData(JsonData jsonData) {
+                this.jsonData = jsonData;
+        }
+
+        public JsonResult getJsonResult() {
+                return jsonResult;
+        }
+
+        public void setJsonResult(JsonResult jsonResult) {
+                this.jsonResult = jsonResult;
+        }
+
+        public String list() {
+                return "list";
+        }
+
+        public String listData() {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                Integer pageIndex = Integer.parseInt(request
+                                .getParameter("page"));
+                Integer pageSize = Integer.parseInt(request
+                                .getParameter("rows"));
+                // 此处应分页查询
+                Pager pager = new Pager();
+                pager.setSize(pageSize);
+                pager.setIndex(pageIndex);
+
+                List<Warn> list = warnService.getByPager(pager);
+
+                jsonData = new JsonData();
+                jsonData.setTotal(warnService.getCount());
+                jsonData.setRows(list);
+
+                return "gridData";
+        }
+
+        public String selectTime() {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                Integer pageIndex = Integer.parseInt(request
+                                .getParameter("page"));
+                Integer pageSize = Integer.parseInt(request
+                                .getParameter("rows"));
+
+                String dateStart = request.getParameter("dateStart");
+                String dateEnd = request.getParameter("dateEnd");
+                dateStart = dateStart.substring(0, 11); // 取出yyyy-MM-dd格式的日期来即可
+                dateEnd = dateEnd.substring(0, 11);
+
+                String whereCondition = "where createTime between '"
+                                + dateStart + "' and '" + dateEnd + "'";
+
+                // 此处应分页查询
+                Pager pager = new Pager();
+                pager.setSize(pageSize);
+                pager.setIndex(pageIndex);
+
+                List<Warn> list = warnService.selectTime(whereCondition, pager);
+
+                jsonData = new JsonData();
+                // data.setTotal(pager.getCount());
+                jsonData.setTotal(warnService.selectCount(whereCondition));
+                jsonData.setRows(list);
+
+                return "gridData";
+        }
+
+        public String showData() {
+                jsonResult = new JsonResult();
+                List<Warn> list = warnService.selectAll();
+                jsonResult.setData(list);
+                jsonResult.setSuccess(true);
+                return "jsonResult";
+        }
+        
+        public String showAllData()
+        {
+        	jsonResult = new JsonResult();
+            List<Warn> list = warnService.selectAllWarn();
+            jsonResult.setData(list);
+            jsonResult.setSuccess(true);
+            System.out.println(list.size());
+            return "jsonResult";
+        }
+
+        public String refresh() {
+                HttpServletRequest request = ServletActionContext.getRequest();
+
+                String dateStartId = request.getParameter("dateStartId");
+                String dateEndId = request.getParameter("dateEndId");
+                dateStartId = dateStartId.substring(0, 11); // 取出yyyy-MM-dd格式的日期来即可
+                dateEndId = dateEndId.substring(0, 11);
+
+                String whereCondition = "where createTime between '"
+                                + dateStartId + "' and '" + dateEndId + "'";
+
+                jsonResult = new JsonResult();
+                List<Warn> list = warnService.selectByWhere(whereCondition);
+                jsonResult.setData(list);
+                jsonResult.setSuccess(true);
+                return "jsonResult";
+        }
+
+        public String updatePost() {
+                jsonResult = new JsonResult();
+
+                int iRows = warnService.deleteByPrimaryKey(warn.getId());
+
+                if (iRows > 0) {
+                        jsonResult.setSuccess(true);
+                        jsonResult.setMessage("成功关闭警告点");
+                } else {
+                        jsonResult.setSuccess(false);
+                        jsonResult.setMessage("关闭警告点失败");
+                }
+
+                return "jsonResult";
+        }
+        
+        //接受并添加警告点
+        public String saveWarn()
+        {
+
+                jsonResult = new JsonResult();
+
+                
+                int id = warnService.insert(warn);
+                
+                if(id > 0)
+                {
+                        jsonResult.setSuccess(true);
+                        jsonResult.setMessage("上传成功");
+                }
+                else
+                {
+                        jsonResult.setSuccess(false);
+                        jsonResult.setMessage("上传失败");
+                }
+                
+                return "jsonResult";
+        }
+}

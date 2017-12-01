@@ -1,0 +1,74 @@
+package cn.gov.entity;
+
+/**
+ * Users entity. @author MyEclipse Persistence Tools
+ */
+
+//用户类
+public class User implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private String loginid;
+	private String password;
+	private String name;
+	private Integer state;
+
+	// Constructors
+
+	/** default constructor */
+	public User() {
+	}
+
+	/** full constructor */
+	public User(String loginid, String password, String name, Integer state) {
+		this.loginid = loginid;
+		this.password = password;
+		this.name = name;
+		this.state = state;
+	}
+
+	// Property accessors
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getLoginid() {
+		return this.loginid;
+	}
+
+	public void setLoginid(String loginid) {
+		this.loginid = loginid;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getState() {
+		return this.state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+}
