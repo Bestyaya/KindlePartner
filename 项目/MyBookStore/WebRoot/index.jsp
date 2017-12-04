@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import = "cn.gov.entity.User" %>
+<%@ page import = "java.util.*" %>
+<%@ page import = "cn.gov.entity.Book" %>
 <html>
 	<head>
 		<title>主页</title>
@@ -63,9 +65,7 @@
 
 		<div class="container">
 			<div class="starter-template">
-				<h1>
-					欢迎来到主界面
-				</h1>
+			<% List<Book> books =  %>
 			</div>
 		</div>
 	</body>
