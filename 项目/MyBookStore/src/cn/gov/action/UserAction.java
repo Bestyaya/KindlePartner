@@ -1,5 +1,10 @@
 package cn.gov.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
 import cn.gov.entity.User;
 import cn.gov.service.UserService;
 import cn.gov.util.JsonResult;
@@ -58,6 +63,9 @@ public class UserAction {
 		boolean ok = userService.login(user); //判断是否登录成功
 		if(ok)
 		{
+			HttpServletRequest request = ServletActionContext.getRequest();
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
 			jsonResult.setSuccess(true);
 			jsonResult.setMessage("登录成功！");
 		}

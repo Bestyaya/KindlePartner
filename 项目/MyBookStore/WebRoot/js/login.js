@@ -62,7 +62,7 @@ $(function() {
 		$("#login_form").css("display", "block");
 	});
 	
-	//
+	//登录功能
 	$("#login_btn").click(function() {
 		 $('#login_form').form('submit',{
              url: 'user_login',
