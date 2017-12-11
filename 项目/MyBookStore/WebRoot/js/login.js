@@ -87,4 +87,32 @@ $(function() {
              }
          });
 	});
+	
+	
+	//注册功能
+	$("#reg_btn").click(function() {
+		 $('#register_form').form('submit',{
+             url: 'user_register',
+             onSubmit: function(){
+                 return $(this).form('validate');
+             },
+             success: function(result){
+            	 alert(0);
+                 if (result == null) return;
+                 alert(1);
+                 result = $.parseJSON(result);    //转换为json对象
+                 alert(2);
+                 var msg = result.message;
+                 alert(3);
+                 if (result.success) {
+                     $.messager.alert("信息提示", msg, "info", function () {
+                         window.location.href = 'index.jsp';
+                     })
+                 }else{
+                     $.messager.alert("错误", "操作失败！" + msg, "error");
+                 }
+             }
+         });
+	});
+	
 });

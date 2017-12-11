@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <input class="form-control eamil" type="text" placeholder="Email" name="user.email"/>  
                     </div>  
                     <div class="form-group">  
-                        <input type="submit" class="btn btn-success pull-right" value="Sign Up "/>  
+                        <input type="submit" id = "reg_btn" class="btn btn-success pull-right" value="Sign Up "/>  
                         <input type="submit" class="btn btn-info pull-left" id="back_btn" value="Back"/>  
                     </div>  
                 </div>  

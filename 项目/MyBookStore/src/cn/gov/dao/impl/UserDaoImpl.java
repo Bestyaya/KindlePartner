@@ -21,4 +21,10 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return (User)q.uniqueResult();
 	}
 
+	public String addUser(User item) {
+		System.out.println(item.getUsername());
+		getHibernateTemplate().save(item);
+		return item.getUsername();
+	}
+	
 }

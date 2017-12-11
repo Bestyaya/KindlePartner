@@ -84,7 +84,7 @@ public class UserAction {
 		
 		jsonResult = new JsonResult();  //实例化JsonResult
 		
-		boolean ok = userService.login(user); //判断是否登录成功
+		boolean ok = userService.addUser(user); //判断是否添加成功
 		if(ok)
 		{
 			HttpServletRequest request = ServletActionContext.getRequest();

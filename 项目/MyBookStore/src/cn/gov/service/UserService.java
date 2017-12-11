@@ -5,5 +5,6 @@ import cn.gov.entity.User;
 public interface UserService {
 	
 	public boolean login(User user);
+	public boolean addUser(User user);
 
 }
