@@ -55,8 +55,32 @@ public class UserAction {
 	
 	public String login()
 	{
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
+		
+		jsonResult = new JsonResult();  //实例化JsonResult
+		
+		boolean ok = userService.login(user); //判断是否登录成功
+		if(ok)
+		{
+			HttpServletRequest request = ServletActionContext.getRequest();
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+			jsonResult.setSuccess(true);
+			jsonResult.setMessage("登录成功！");
+			
+			return "success";
+		}
+		else
+		{
+			jsonResult.setSuccess(false);
+			jsonResult.setMessage("用户名或密码不匹配，登录失败！");
+		}
+		
+		return "login";
+	}
+	
+	
+	public String register()
+	{
 		
 		jsonResult = new JsonResult();  //实例化JsonResult
 		
@@ -77,5 +101,6 @@ public class UserAction {
 		
 		return "success";
 	}
+	
 
 }

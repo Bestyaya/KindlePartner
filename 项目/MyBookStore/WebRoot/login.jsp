@@ -108,16 +108,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>  
   
         <div class="form row">  
-            <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form">  
+            <form class="form-horizontal col-sm-offset-3 col-md-offset-3" name = "register_form" id="register_form" action = "user_register">  
                 <h3 class="form-title">Login to your account</h3>  
                 <div class="col-sm-9 col-md-9">  
                     <div class="form-group">  
                         <i class="fa fa-user fa-lg"></i>  
-                        <input class="form-control required" type="text" placeholder="Username" name="username" autofocus="autofocus"/>  
+                        <input class="form-control required" type="text" placeholder="Username" name="user.username" autofocus="autofocus"/>  
                     </div>  
                     <div class="form-group">  
                             <i class="fa fa-lock fa-lg"></i>  
-                            <input class="form-control required" type="password" placeholder="Password" id="register_password" name="password"/>  
+                            <input class="form-control required" type="password" placeholder="Password" id="register_password" name="user.password"/>  
                     </div>  
                     <div class="form-group">  
                             <i class="fa fa-check fa-lg"></i>  
@@ -125,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>  
                     <div class="form-group">  
                             <i class="fa fa-envelope fa-lg"></i>  
-                            <input class="form-control eamil" type="text" placeholder="Email" name="email"/>  
+                            <input class="form-control eamil" type="text" placeholder="Email" name="user.email"/>  
                     </div>  
                     <div class="form-group">  
                         <input type="submit" class="btn btn-success pull-right" value="Sign Up "/>  

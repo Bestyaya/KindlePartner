@@ -11,11 +11,12 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String password;
 	private Integer vip;
+	private String email;
 	private Double balance;
 
 	// Constructors
 
-        /** default constructor */
+	/** default constructor */
 	public User() {
 	}
 
@@ -24,30 +25,46 @@ public class User implements java.io.Serializable {
 		this.password = password;
 		this.vip = vip;
 	}
-	
+
 	public User(String password, Integer vip, Double balance) {
-                this.password = password;
-                this.vip = vip;
-                this.balance = balance;
-        }
-	
+		this.password = password;
+		this.vip = vip;
+		this.balance = balance;
+	}
+
 	public User(String username, String password, Integer vip, Double balance) {
-	        this.username =username;
-                this.password = password;
-                this.vip = vip;
-                this.balance = balance;
-        }
+		this.username = username;
+		this.password = password;
+		this.vip = vip;
+		this.balance = balance;
+	}
+	
+	public User(String username, String password, Integer vip, Double balance, String email) {
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.vip = vip;
+		this.balance = balance;
+	}
 
 	// Property accessors
 
-	public Double getBalance() {
-                return balance;
-        }
+	public String getEmail() {
+		return email;
+	}
 
-        public void setBalance(Double balance) {
-                this.balance = balance;
-        }
-	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
 	public String getUsername() {
 		return this.username;
 	}
