@@ -75,7 +75,7 @@ public class UserAction {
 			jsonResult.setMessage("用户名或密码不匹配，登录失败！");
 		}
 		
-		return "jsonResult";
+		return "success";
 	}
 
 }

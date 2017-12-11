@@ -65,7 +65,7 @@
 
 		<div class="container">
 			<div class="starter-template">
-			<% List<Book> books =  %>
+			<h1>Hello World!</h1>
 			</div>
 		</div>
 	</body>
