@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public boolean addUser(User user) {
-		if (userDao.addUser(user) != null)
+		if (userDao.addUser(user) > 0)
 			return true;
 		return false;
 	}

@@ -21,10 +21,13 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return (User)q.uniqueResult();
 	}
 
-	public String addUser(User item) {
-		System.out.println(item.getUsername());
+	//添加用户
+	public Integer addUser(User item) {
+
+		item.setVip(0);   //初始化VIP等级
+		item.setBalance(100.00);  //初始余额
 		getHibernateTemplate().save(item);
-		return item.getUsername();
+		return item.getId();
 	}
 	
 }

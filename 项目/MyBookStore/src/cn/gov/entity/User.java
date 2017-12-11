@@ -11,6 +11,7 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String password;
 	private Integer vip;
+	private Integer id;
 	private String email;
 	private Double balance;
 
@@ -38,8 +39,19 @@ public class User implements java.io.Serializable {
 		this.vip = vip;
 		this.balance = balance;
 	}
+
+	public User(String username, String password, Integer vip, Double balance,
+			String email) {
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.vip = vip;
+		this.balance = balance;
+	}
 	
-	public User(String username, String password, Integer vip, Double balance, String email) {
+	public User(Integer id,String username, String password, Integer vip, Double balance,
+			String email) {
+		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -49,6 +61,14 @@ public class User implements java.io.Serializable {
 
 	// Property accessors
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public String getEmail() {
 		return email;
 	}

@@ -6,10 +6,13 @@
 -->
 <hibernate-mapping>
     <class name="cn.gov.entity.User" table="user" catalog="kindledb">
-        <id name="username" type="java.lang.String">
-            <column name="username" />
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="native" />
         </id>
+        <property name="username" type="java.lang.String">
+            <column name="username" />
+        </property>
         <property name="password" type="java.lang.String">
             <column name="password" />
         </property>

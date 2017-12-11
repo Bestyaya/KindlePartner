@@ -8,6 +8,6 @@ public interface UserDao {
 	public User getUser(User user);
 	
 	//添加用户
-	public String addUser(User item);
+	public Integer addUser(User item);
 
 }
