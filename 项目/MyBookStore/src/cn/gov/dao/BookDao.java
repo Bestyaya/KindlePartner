@@ -6,6 +6,7 @@ import cn.gov.entity.Book;
 
 public interface BookDao {
 	
+	//得到所有的书籍
 	public List<Book> getBooks();
 
 }

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ page import = "cn.gov.entity.User" %>
-<%@ page import = "java.util.*" %>
-<%@ page import = "cn.gov.entity.Book" %>
+<%@ page import="cn.gov.entity.User"%>
+<%@ page import="java.util.*"%>
+<%@ page import="cn.gov.entity.Book"%>
 <html>
 	<head>
 		<title>主页</title>
@@ -45,13 +45,13 @@
 						<a href="index.jsp">主页</a>
 					</li>
 					<li>
-						<a href="login.jsp">
-						<%
-						User user = (User)session.getAttribute("user");
-						if(user == null) out.print("登录/注册");
-						else out.print(user.getUsername());
-						 %>
-						</a>
+						<a href="login.jsp"> <%
+ 	User user = (User) session.getAttribute("user");
+ 	if (user == null)
+ 		out.print("登录/注册");
+ 	else
+ 		out.print(user.getUsername());
+ %> </a>
 					</li>
 					<li>
 						<a href="about.jsp">关于</a>
@@ -64,9 +64,6 @@
 
 
 		<div class="container">
-			<div class="starter-template">
-			<h1>Hello World!</h1>
-			</div>
 		</div>
 	</body>
 </html>

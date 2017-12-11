@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 
 import cn.gov.entity.Book;
 import cn.gov.entity.User;
+import cn.gov.service.BookService;
 import cn.gov.service.UserService;
 import cn.gov.util.JsonResult;
 
@@ -17,7 +18,7 @@ public class BookAction {
 
 	private Book book;
 	private String json;
-	private UserService userService;
+	private BookService bookService;
 	private JsonResult jsonResult;
 
 	public Book getBook() {
@@ -28,12 +29,12 @@ public class BookAction {
 		this.book = book;
 	}
 	
-	public UserService getUserService() {
-		return userService;
+	public BookService getUserService() {
+		return bookService;
 	}
 
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setUserService(BookService bookService) {
+		this.bookService = bookService;
 	}
 
 	public String getJson() {
@@ -58,8 +59,7 @@ public class BookAction {
 
 	public List<Book> getBooks()
 	{
-		List<Book> books = new ArrayList<Book>();
-		
+		List<Book> books = bookService.getAllBook();
 		return books;
 	}
 }

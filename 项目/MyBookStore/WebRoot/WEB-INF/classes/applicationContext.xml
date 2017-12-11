@@ -41,10 +41,16 @@
 	<bean name="userDao" class="cn.gov.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean name="bookDao" class="cn.gov.dao.impl.BookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	
 	<!-- 这里是service的bean -->
 	<bean name="userService" class="cn.gov.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean name="bookService" class="cn.gov.service.impl.BookServiceImpl">
+		<property name="bookDao" ref="bookDao"></property>
 	</bean>
 	
 	<!-- 这里是action的bean -->
