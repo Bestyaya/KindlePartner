@@ -1,28 +1,36 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import = "cn.gov.entity.User" %>
-<%@ page import = "java.util.*" %>
-<%@ page import = "cn.gov.entity.Book" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>主页</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<base href="<%=basePath%>">
+
+		<title>My JSP 'about.jsp' starting page</title>
+
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<link href="css/style.css" type="text/css" rel="stylesheet"
-			rev="stylesheet" />
+		<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+		<!-- Bootstrap core CSS -->
+
 		<!-- starter-template.js -->
 		<link href="js/starter-template.js" type="text/css" rel="stylesheet">
-		<!-- Bootstrap core CSS -->
+
 		<link
 			href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 			rel="stylesheet">
+
 	</head>
+
 	<body>
 
 		<!-- 导航栏  -->
@@ -45,28 +53,34 @@
 						<a href="index.jsp">主页</a>
 					</li>
 					<li>
-						<a href="login.jsp">
-						<%
+						<a href="login.jsp"> <%
 						User user = (User)session.getAttribute("user");
 						if(user == null) out.print("登录/注册");
 						else out.print(user.getUsername());
-						 %>
-						</a>
+						 %> </a>
 					</li>
 					<li>
 						<a href="about.jsp">关于</a>
 					</li>
 				</ul>
 			</div>
-			<!--/.nav-collapse -->
 		</div>
 		</nav>
 
-
 		<div class="container">
+
+			<!-- 内容  -->
 			<div class="starter-template">
-			<h1>Hello World!</h1>
+				<h1>项目名：我的电子书店</h1>
+				<h1>组长：董成荣</h1>
+				<h1>架构：杨聪毅</h1>
+				<h1>文档：曹光强</h1>
+				<h1>美工：王海燕</h1>
+				<h1>编码：王昺垚</h1>
+				<h1>编码：刘玉安</h1>
 			</div>
+
 		</div>
+		<!-- /.container -->
 	</body>
 </html>
