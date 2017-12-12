@@ -87,9 +87,6 @@ public class UserAction {
 		boolean ok = userService.addUser(user); //判断是否添加成功
 		if(ok)
 		{
-			HttpServletRequest request = ServletActionContext.getRequest();
-			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
 			jsonResult.setSuccess(true);
 			jsonResult.setMessage("登录成功！");
 		}
@@ -99,7 +96,7 @@ public class UserAction {
 			jsonResult.setMessage("用户名或密码不匹配，登录失败！");
 		}
 		
-		return "success";
+		return "login";
 	}
 	
 
