@@ -35,6 +35,7 @@
 	</tx:advice>
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.UserServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.BookServiceImpl.*(..))" />
 	</aop:config> <!-- 这里使用了set方法进行注入-->
 	<!-- 这里name只能定义为userDao，而不能是userDaoImpl，否则无法进行设值注入  -->
 	<!-- 这里是dao的bean -->
@@ -53,8 +54,13 @@
 		<property name="bookDao" ref="bookDao"></property>
 	</bean>
 	
+	
 	<!-- 这里是action的bean -->
 	<bean name="userAction" class="cn.gov.action.UserAction">
 		<property name="userService" ref="userService" />
 	</bean>
+	<bean name="BookAction" class="cn.gov.action.BookAction">
+		<property name="bookService" ref="bookService"></property>
+	</bean>
+
 </beans>

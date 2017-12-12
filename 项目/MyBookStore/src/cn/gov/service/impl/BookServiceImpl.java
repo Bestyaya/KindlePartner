@@ -20,7 +20,12 @@ public class BookServiceImpl implements BookService {
 
 	public List<Book> getAllBook() {
 		// TODO Auto-generated method stub
-		return bookDao.getBooks();
+	        System.out.println("I'M HERE");
+	        if(bookDao == null) System.out.println("NULL");
+	        else System.out.println("NOT NULL");
+		List<Book> books = bookDao.getBooks();
+		
+		return books;
 	}
 
 }

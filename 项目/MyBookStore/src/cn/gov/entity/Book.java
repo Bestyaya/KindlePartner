@@ -1,97 +1,103 @@
 package cn.gov.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-/**
- * Book entity. @author MyEclipse Persistence Tools
- */
+public class Book implements Serializable {
 
-public class Book implements java.io.Serializable {
+        private Integer id;
+        private String ASIN;
+        private String title;
+        private String imageFile;
+        private String publisher;
+        private double price;
+        
+        //构造方法
+        public Book(Integer id, String ASIN, String title, String imageFile,
+                      String publisher, double price) {
+                super();
+                this.id = id;
+                this.ASIN = ASIN;
+                this.title = title;
+                this.imageFile = imageFile;
+                this.publisher = publisher;
+                this.price = price;
+        }
+        
+        public Integer getId() {
+                return id;
+        }
 
-	// Fields
+        public void setId(Integer id) {
+                this.id = id;
+        }
 
-	private String asin;
-	private String title;
-	private String author;
-	private String imageSrc;
-	private String summary;
-	private Double price;
-	private Set shopcarts = new HashSet(0);
+        public String getASIN() {
+                return ASIN;
+        }
 
-	// Constructors
+        public void setASIN(String aSIN) {
+                ASIN = aSIN;
+        }
 
-	/** default constructor */
-	public Book() {
-	}
+        /**
+         * @return the title
+         */
+        public String getTitle() {
+                return title;
+        }
 
-	/** full constructor */
-	public Book(String title, String author, String imageSrc, String summary,
-			Double price, Set shopcarts) {
-		this.title = title;
-		this.author = author;
-		this.imageSrc = imageSrc;
-		this.summary = summary;
-		this.price = price;
-		this.shopcarts = shopcarts;
-	}
+        /**
+         * @param title
+         *                the title to set
+         */
+        public void setTitle(String title) {
+                this.title = title;
+        }
 
-	// Property accessors
+       
+        /**
+         * @return the imageFile
+         */
+        public String getImageFile() {
+                return imageFile;
+        }
 
-	public String getAsin() {
-		return this.asin;
-	}
+        /**
+         * @param imageFile
+         *                the imageFile to set
+         */
+        public void setImageFile(String imageFile) {
+                this.imageFile = imageFile;
+        }
+        
+        /**
+         * @return the publisherID
+         */
+        public String getPublisher() {
+                return publisher;
+        }
 
-	public void setAsin(String asin) {
-		this.asin = asin;
-	}
+        /**
+         * @param publisherID
+         *                the publisherID to set
+         */
+        public void setPublisher(String publisher) {
+                this.publisher = publisher;
+        }
 
-	public String getTitle() {
-		return this.title;
-	}
+        /**
+         * @return the price
+         */
+        public double getPrice() {
+                return price;
+        }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getAuthor() {
-		return this.author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	public String getImageSrc() {
-		return this.imageSrc;
-	}
-
-	public void setImageSrc(String imageSrc) {
-		this.imageSrc = imageSrc;
-	}
-
-	public String getSummary() {
-		return this.summary;
-	}
-
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
-
-	public Double getPrice() {
-		return this.price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public Set getShopcarts() {
-		return this.shopcarts;
-	}
-
-	public void setShopcarts(Set shopcarts) {
-		this.shopcarts = shopcarts;
-	}
+        /**
+         * @param price
+         *                the price to set
+         */
+        public void setPrice(double price) {
+                this.price = price;
+        }
 
 }

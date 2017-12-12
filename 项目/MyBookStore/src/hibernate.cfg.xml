@@ -8,15 +8,20 @@
 
 <session-factory>
 	<property name="hbm2ddl.auto">update</property>
-	<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-	<property name="connection.url">jdbc:mysql://localhost:3306/kindledb</property>
+	<property name="dialect">
+		org.hibernate.dialect.MySQLDialect
+	</property>
+	<property name="connection.url">
+		jdbc:mysql://localhost:3306/kindledb
+	</property>
 	<property name="connection.username">root</property>
 	<property name="connection.password">123456</property>
-	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+	<property name="connection.driver_class">
+		com.mysql.jdbc.Driver
+	</property>
 	<property name="myeclipse.connection.profile">Driver</property>
 	<mapping resource="cn/gov/entity/User.hbm.xml" />
 	<mapping resource="cn/gov/entity/Book.hbm.xml" />
-	<mapping resource="cn/gov/entity/Shopcart.hbm.xml" />
 
 </session-factory>
 

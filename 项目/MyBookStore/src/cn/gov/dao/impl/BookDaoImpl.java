@@ -15,7 +15,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
 		// TODO Auto-generated method stub
 		String hql = "from book";
 		Query q = getSession().createQuery(hql);
-        return q.list();
+		return q.list();
 	}
 
 }

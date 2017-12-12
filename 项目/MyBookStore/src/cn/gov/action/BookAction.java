@@ -29,11 +29,11 @@ public class BookAction {
 		this.book = book;
 	}
 	
-	public BookService getUserService() {
+	public BookService getBookService() {
 		return bookService;
 	}
 
-	public void setUserService(BookService bookService) {
+	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
 	}
 
