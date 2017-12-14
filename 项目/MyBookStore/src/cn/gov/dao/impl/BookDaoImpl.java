@@ -13,7 +13,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
 
 	public List<Book> getBooks() {
 		// TODO Auto-generated method stub
-		String hql = "from book";
+		String hql = "from Book";
 		Query q = getSession().createQuery(hql);
 		return q.list();
 	}

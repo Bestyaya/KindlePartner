@@ -42,7 +42,7 @@
 	<bean name="userDao" class="cn.gov.dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean name="bookDao" class="cn.gov.dao.impl.BookDaoImpl">
+	<bean id="bookDao" class="cn.gov.dao.impl.BookDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
@@ -59,7 +59,7 @@
 	<bean name="userAction" class="cn.gov.action.UserAction">
 		<property name="userService" ref="userService" />
 	</bean>
-	<bean name="BookAction" class="cn.gov.action.BookAction">
+	<bean name="bookAction" class="cn.gov.action.BookAction">
 		<property name="bookService" ref="bookService"></property>
 	</bean>
 

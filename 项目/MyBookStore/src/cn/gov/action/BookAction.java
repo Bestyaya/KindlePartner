@@ -57,9 +57,12 @@ public class BookAction {
 		return "error";
 	}
 
-	public List<Book> getBooks()
+	public String getBooks()
 	{
 		List<Book> books = bookService.getAllBook();
-		return books;
+		HttpServletRequest request = ServletActionContext.getRequest();
+                HttpSession session = request.getSession();
+                session.setAttribute("books", books);
+		return "success";
 	}
 }

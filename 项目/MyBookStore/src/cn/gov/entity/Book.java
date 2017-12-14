@@ -12,6 +12,9 @@ public class Book implements Serializable {
         private double price;
         
         //构造方法
+        
+        public Book() {}
+        
         public Book(Integer id, String ASIN, String title, String imageFile,
                       String publisher, double price) {
                 super();

@@ -1,39 +1,20 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ page import="cn.gov.entity.User"%>
-<%@ page import="java.util.*"%>
-<%@ page import="cn.gov.service.*"%>
-<%@ page import="cn.gov.service.impl.*"%>
-<%@ page import="cn.gov.entity.Book"%>
+<%@ page contentType="text/html;charset=gbk" import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<html>
-<head>
-<title>‰∏ªÈ°µ</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
-<link href="css/style.css" type="text/css" rel="stylesheet"
-	rev="stylesheet" />
-<!-- starter-template.js -->
+
+<HTML>
+<HEAD>
+<TITLE>÷˜“≥</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
 <link href="js/starter-template.js" type="text/css" rel="stylesheet">
-<!-- Bootstrap core CSS -->
-<link
-	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
-</head>
-<body>
 
-	<!-- ÂºïÂÖ•ÂØºËà™Ê†è  -->
-	<jsp:include page="navbar.jsp" flush="true"></jsp:include>
-
+</HEAD>
+<BODY>
+	<jsp:include page="navbar.jsp"></jsp:include>
 	<div class="container">
-		<CENTER>
+
+		<div class="starter-template">
+			<center>
 			<TABLE cellSpacing=0 cellPadding=0 width=778 bgColor=#ffffff
 				background=img/top1bg.jpg border=0>
 				<TBODY>
@@ -110,66 +91,55 @@
 								<TBODY>
 									<TR>
 										<TD align=left height=25><IMG height=11
-											src="img/icon1.gif" width=31> Âõæ‰π¶ÂàóË°®È°µÈù¢</TD>
+											src="img/icon1.gif" width=31> Õº È¡–±Ì“≥√Ê</TD>
 									</TR>
 								</TBODY>
-							</TABLE>
-				<BR>
+							</TABLE> <BR>
 
-				<form method="POST" name="Regsiter" action="register">
-					<TABLE style="TEXT-ALIGN: center" cellSpacing=0 cellPadding=0
-						width=590 border=0>
-						<TBODY>
+							<TABLE style="TEXT-ALIGN: center" cellSpacing=0 cellPadding=0
+								width=590 border=0>
+								<TBODY>
+									<!--   œ‘ æø™ º  -->
+									<c:forEach items="${sessionScope.books}" var="book"
+										varStatus="s">
+										<c:if test="${s.index%3==0}">
+											<tr>
+										</c:if>
+										<td>
 
-							<!--   ÊòæÁ§∫ÂºÄÂßã  -->
-							<%
-										BookService service = new BookServiceImpl(); 
-										List<Book> books = service.getAllBook();
-										session.setAttribute("books",books);
-							 %>
-							
-							<c:set var="users" value="${books}" scope="session" />
-							<c:forEach items="${sessionScope.user}" var="book" varStatus="s">
-								<c:if test="${s.index%3==0}">
-									<tr>
-								</c:if>
-								<td>
-
-									<table width="180" cellpadding="0" cellspacing="0" border=0>
-										<tr>
-											<td vAlign=bottom><a
-												href="bookDetail.jsp?isbn=${book.ASIN }">${book.ASIN }</a>
-											</td>
-										</tr>
-										<tr>
-											<td><c:choose>
-													<c:when test="${fn:length(book.title)>20}">
+											<table width="180" cellpadding="0" cellspacing="0" border=0>
+												<tr>
+													<td vAlign=bottom><a
+														href="bookDetail.jsp?isbn=${book.ASIN }">${book.ASIN }</a>
+													</td>
+												</tr>
+												<tr>
+													<td><c:choose>
+															<c:when test="${fn:length(book.title)>20}">
 					           ${fn:substring(book.title,1,17)}...
 					         </c:when>
-													<c:otherwise>
+															<c:otherwise>
 					           ${book.title }
 					         </c:otherwise>
-												</c:choose>
-											</td>
-										</tr>
-										<tr>
-											<td><img src="img/${book.imageFile }">
-											</td>
-										</tr>
-									</table>
-								</td>
-								<c:if test="${s.index%3==2}">
-									</tr>
-								</c:if>
-							</c:forEach>
+														</c:choose>
+													</td>
+												</tr>
+												<tr>
+													<td><img src="img/${book.imageFile}"></td>
+												</tr>
+											</table>
+										</td>
+										<c:if test="${s.index%3==2}">
+											</tr>
+										</c:if>
+									</c:forEach>
 
-							<!--   ÊòæÁ§∫ÁªìÊùü -->
-						</TBODY>
-					</TABLE>
-				</form>
-				<BR>
-				</TD>
-				</TR>
+									<!--   œ‘ æΩ· ¯ -->
+								</TBODY>
+							</TABLE>
+							 <BR>
+						</TD>
+					</TR>
 				</TBODY>
 			</TABLE>
 			<TABLE class=center cellSpacing=0 cellPadding=0 width=778
@@ -180,8 +150,9 @@
 					</TR>
 				</TBODY>
 			</TABLE>
+			</center>
+		</div>
 
-		</CENTER>
 	</div>
-</body>
-</html>
+</BODY>
+</HTML>
