@@ -29,7 +29,7 @@
 
 		<div class="container">
 
-		<div class="starter-template">
+		<div class="css/main.css">
 			<h1>出错了</h1>
 		</div>
 

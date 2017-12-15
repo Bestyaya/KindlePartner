@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- Bootstrap core CSS -->
 
 		<!-- starter-template.js -->
-		<link href="js/starter-template.js" type="text/css" rel="stylesheet">
+		<link href="css/main.css" type="text/css" rel="stylesheet">
 
 		<link
 			href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"

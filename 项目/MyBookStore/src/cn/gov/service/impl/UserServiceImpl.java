@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
 	public boolean login(User user) {
 		// TODO Auto-generated method stub
 
-	        if(userDao != null) System.out.println("userDao NOT NULL!!!");
 		if (userDao.getUser(user) != null)
 			return true;
 

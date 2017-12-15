@@ -6,7 +6,7 @@
 <HEAD>
 <TITLE>主页</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=gb2312">
-<link href="js/starter-template.js" type="text/css" rel="stylesheet">
+<link href="css/main.css" type="text/css" rel="stylesheet">
 
 </HEAD>
 <BODY>
@@ -102,7 +102,7 @@
 									<!--   显示开始  -->
 									<c:forEach items="${sessionScope.books}" var="book"
 										varStatus="s">
-										<c:if test="${s.index%3==0}">
+										<c:if test="${s.index%2==0}">
 											<tr>
 										</c:if>
 										<td>
@@ -129,7 +129,7 @@
 												</tr>
 											</table>
 										</td>
-										<c:if test="${s.index%3==2}">
+										<c:if test="${s.index%2==1}">
 											</tr>
 										</c:if>
 									</c:forEach>
