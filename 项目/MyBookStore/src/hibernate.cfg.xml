@@ -22,6 +22,7 @@
 	<property name="myeclipse.connection.profile">Driver</property>
 	<mapping resource="cn/gov/entity/User.hbm.xml" />
 	<mapping resource="cn/gov/entity/Book.hbm.xml" />
+	<mapping resource="cn/gov/entity/Cart.hbm.xml" />
 
 </session-factory>
 

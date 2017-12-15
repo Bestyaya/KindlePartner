@@ -36,6 +36,7 @@
 	<aop:config>
 		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.UserServiceImpl.*(..))" />
 		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.BookServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txAdvice"	pointcut="execution(* cn.gov.service.impl.CartServiceImpl.*(..))" />
 	</aop:config> <!-- 这里使用了set方法进行注入-->
 	<!-- 这里name只能定义为userDao，而不能是userDaoImpl，否则无法进行设值注入  -->
 	<!-- 这里是dao的bean -->
@@ -43,6 +44,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="bookDao" class="cn.gov.dao.impl.BookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="cartDao" class="cn.gov.dao.impl.CartDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
@@ -53,7 +57,9 @@
 	<bean name="bookService" class="cn.gov.service.impl.BookServiceImpl">
 		<property name="bookDao" ref="bookDao"></property>
 	</bean>
-	
+	<bean name="cartService" class="cn.gov.service.impl.CartServiceImpl">
+		<property name="cartDao" ref="cartDao"></property>
+	</bean>
 	
 	<!-- 这里是action的bean -->
 	<bean name="userAction" class="cn.gov.action.UserAction">
@@ -61,6 +67,9 @@
 	</bean>
 	<bean name="bookAction" class="cn.gov.action.BookAction">
 		<property name="bookService" ref="bookService"></property>
+	</bean>
+	<bean name="cartAction" class="cn.gov.action.CartAction">
+		<property name="cartService" ref="cartService"></property>
 	</bean>
 
 </beans>

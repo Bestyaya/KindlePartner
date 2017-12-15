@@ -25,5 +25,11 @@
         <property name="balance" type = "java.lang.Double">
         	<column name="balance"/>
         </property>
+        <set name="cartes" inverse = "true">
+       			 <key>
+       			 		<column name="user_id"></column>
+        		</key>
+        		<one-to-many class = "cn.gov.entity.Cart"  />
+        </set>
     </class>
 </hibernate-mapping>

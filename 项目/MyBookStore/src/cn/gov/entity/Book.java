@@ -1,6 +1,8 @@
 package cn.gov.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Book implements Serializable {
 
@@ -10,13 +12,14 @@ public class Book implements Serializable {
         private String imageFile;
         private String publisher;
         private double price;
-        
-        //构造方法
-        
-        public Book() {}
-        
+        private Set cartes = new HashSet(0);
+
+        // 构造方法
+        public Book() {
+        }
+
         public Book(Integer id, String ASIN, String title, String imageFile,
-                      String publisher, double price) {
+                        String publisher, double price) {
                 super();
                 this.id = id;
                 this.ASIN = ASIN;
@@ -25,7 +28,28 @@ public class Book implements Serializable {
                 this.publisher = publisher;
                 this.price = price;
         }
+
+        public Book(Integer id, String ASIN, String title, String imageFile,
+                        String publisher, double price, Set cartes) {
+                super();
+                this.id = id;
+                this.ASIN = ASIN;
+                this.title = title;
+                this.imageFile = imageFile;
+                this.publisher = publisher;
+                this.price = price;
+                this.cartes = cartes;
+        }
         
+        public Set getCartes() {
+                return cartes;
+        }
+
+        public void setCartes(Set cartes) {
+                this.cartes = cartes;
+        }
+
+
         public Integer getId() {
                 return id;
         }
@@ -57,7 +81,6 @@ public class Book implements Serializable {
                 this.title = title;
         }
 
-       
         /**
          * @return the imageFile
          */
@@ -72,7 +95,7 @@ public class Book implements Serializable {
         public void setImageFile(String imageFile) {
                 this.imageFile = imageFile;
         }
-        
+
         /**
          * @return the publisherID
          */
