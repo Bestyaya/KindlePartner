@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-12-12 17:15:41
+Date: 2017-12-15 22:19:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,12 +27,34 @@ CREATE TABLE `book` (
   `price` double DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of book
 -- ----------------------------
-INSERT INTO `book` VALUES ('9787302291077', '算法竞赛入门经典——训练指南（算法艺术与信息学竞赛）', '算法竞赛01', '清华大学出版社', '52.8', '1');
+INSERT INTO `book` VALUES ('9787302291077', '算法竞赛入门经典——训练指南', '01.jpg', '清华大学出版社', '52.8', '1');
+INSERT INTO `book` VALUES ('9787302476580', '算法竞赛入门经典——习题与解答', '02.jpg', '清华大学出版社', '55.1', '2');
+INSERT INTO `book` VALUES ('9787302356288', ' 算法竞赛入门经典（第2版）', '03.jpg', '清华大学出版社', '35.6', '3');
+
+-- ----------------------------
+-- Table structure for cart
+-- ----------------------------
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `book_id` int(11) DEFAULT NULL,
+  `state` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `key1` (`user_id`),
+  KEY `key2` (`book_id`),
+  CONSTRAINT `key1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `key2` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for user
@@ -46,10 +68,11 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('123', '123456', '2', '1230', '1', null);
 INSERT INTO `user` VALUES ('dcr', '123456', '0', '100', '2', '123@163.com');
+INSERT INTO `user` VALUES ('321', '321', '0', '100', '3', '321@163.com');
