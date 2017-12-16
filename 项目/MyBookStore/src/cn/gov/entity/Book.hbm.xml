@@ -31,12 +31,5 @@
             <column name="publisher"  />
         </property>
         
-        <set name = "cartes" inverse ="true">
-        	<key>
-        			<column name="book_id"></column>
-        	</key>
-        	<one-to-many class = "cn.gov.entity.Cart" />
-        </set>
-        
     </class>
 </hibernate-mapping>

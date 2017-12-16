@@ -16,13 +16,10 @@ public class UserServiceImpl implements UserService {
 		this.userDao = userDao;
 	}
 
-	public boolean login(User user) {
+	public User login(User user) {
 		// TODO Auto-generated method stub
 
-		if (userDao.getUser(user) != null)
-			return true;
-
-		return false;
+		return userDao.getUser(user);
 	}
 
 	public boolean addUser(User user) {

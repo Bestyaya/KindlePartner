@@ -7,7 +7,6 @@
 <TITLE>购物车</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=gb2312">
 <LINK href="css/main.css" type=text/css rel=stylesheet>
-
 </HEAD>
 <BODY>
 <CENTER>
@@ -103,30 +102,34 @@
 			  <table width="605" border="2">
                 <tr>
                   <td><div align="center">书名</div></td>
-                  <td><div align="center">单价</div></td>
+                  <td><div align="center">价格</div></td>
                   <td><div align="center">数量</div></td>
                   <td><div align="center">总价</div></td>
                    <td><div align="center"><a href = "cart_deleteAll">清空</a></div></td>
                 </tr>
                 <c:set var="totalMoney" value="0" scope="session"></c:set>                 
-                <c:set var="cart1" value="${sessionScope.cart}" scope="session"/>
+                <c:set var="cart1" value="${sessionScope.cartes}" scope="session"/>
                 <c:choose>                
-                <c:when test="${empty cart}">
+                <c:when test="${empty cartes}">
                   ${"购物车为空"}
                  <a href='index.jsp'>前去购物</a>
                 </c:when>
                 <c:otherwise>
                 
                 <c:forEach items="${cart1}"  var="cart" varStatus="count">
-                <c:set var="ci" value="${cart.value}"/>
-                <c:set var="book" value="${ci.book}"/>
-                <c:set var="quatity" value="${ci.quality}"/>
-                <c:set var="price" value="${book.price }"/>
-                <c:set value="${totalMoney+totalPrice}" var="totalMoney" scope="session"></c:set>
-              
+                		<c:forEach items="${books}" var="book">
+                		<c:if test="${cart.book_id eq book.id}">              
+						<c:set value="${book}" var="sbook" scope="session" />
+						</c:if></c:forEach>
+                
+                <c:set var="title" value="${sbook.title}"/>
+                <c:set var="price" value="${sbook.price}"/>
+                <c:set var="quatity" value="${cart.number}"/>
+                <c:set var="totalPrice" value="${quatity * price }"/>
+                <c:set value="${totalMoney+totalPrice}" var="totalMoney" scope="session"></c:set>           
                  <tr>
-                  <td><div align="center">${book.title }</div></td>
-                  <td><div align="center">${book.price}</div></td>
+                  <td><div align="center">${title}</div></td>
+                  <td><div align="center">${price}</div></td>
                   <td><div align="center">${quatity}</div></td>
                  <td><div align="center">${totalPrice}</div></td>
                   <td><div align="center"><a href = "cart_delete?ASIN =${book.ASIN} } ">取消</a></div></td>

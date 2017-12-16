@@ -9,26 +9,60 @@ public class Cart implements java.io.Serializable {
         // Fields
 
         private Integer id;
-        private User user;
-        private Book book;
+        private Integer book_id;
+        private Integer user_id;
         private Integer state;
+        private Integer number;
 
         // Constructors
 
         /** default constructor */
         public Cart() {
         }
-
-        /** minimal constructor */
+        
+        public Cart(Integer book_id, Integer user_id, Integer state) {
+                super();
+                this.book_id = book_id;
+                this.user_id = user_id;
+                this.state = state;
+        }
+        
         public Cart(Integer state) {
                 this.state = state;
         }
-
-        /** full constructor */
-        public Cart(User user, Book book, Integer state) {
-                this.user = user;
-                this.book = book;
+        
+        public Cart(Integer id, Integer book_id, Integer user_id, Integer state) {
+                super();
+                this.id = id;
+                this.book_id = book_id;
+                this.user_id = user_id;
                 this.state = state;
+        }
+        
+        public Integer getNumber() {
+                return number;
+        }
+
+        public void setNumber(Integer number) {
+                this.number = number;
+        }
+
+
+        public Integer getBook_id() {
+                return book_id;
+        }
+
+        public void setBook_id(Integer book_id) {
+                this.book_id = book_id;
+        }
+
+        public Integer getUser_id() {
+                return user_id;
+        }
+
+
+        public void setUser_id(Integer user_id) {
+                this.user_id = user_id;
         }
 
         // Property accessors
@@ -41,21 +75,6 @@ public class Cart implements java.io.Serializable {
                 this.id = id;
         }
 
-        public User getUser() {
-                return this.user;
-        }
-
-        public void setUser(User user) {
-                this.user = user;
-        }
-
-        public Book getBook() {
-                return this.book;
-        }
-
-        public void setBook(Book book) {
-                this.book = book;
-        }
 
         public Integer getState() {
                 return this.state;

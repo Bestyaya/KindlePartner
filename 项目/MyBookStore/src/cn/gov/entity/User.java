@@ -16,7 +16,6 @@ public class User implements java.io.Serializable {
 	private Integer id;
 	private String email;
 	private Double balance;
-	private Set cartes = new HashSet(0);
 
 	// Constructors
 
@@ -24,18 +23,6 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	/** full constructor */
-	public User(String username, String password, Integer vip, Integer id,
-                        String email, Double balance, Set cartes) {
-                super();
-                this.username = username;
-                this.password = password;
-                this.vip = vip;
-                this.id = id;
-                this.email = email;
-                this.balance = balance;
-                this.cartes = cartes;
-        }
 	public User(String password, Integer vip) {
 		this.password = password;
 		this.vip = vip;
@@ -74,15 +61,6 @@ public class User implements java.io.Serializable {
 	}
 
 	// Property accessors
-
-	public Set getCartes() {
-                return cartes;
-        }
-
-        public void setCartes(Set cartes) {
-                this.cartes = cartes;
-        }
-	
 	public Integer getId() {
 		return id;
 	}

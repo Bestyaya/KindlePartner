@@ -12,7 +12,6 @@ public class Book implements Serializable {
         private String imageFile;
         private String publisher;
         private double price;
-        private Set cartes = new HashSet(0);
 
         // 构造方法
         public Book() {
@@ -27,26 +26,6 @@ public class Book implements Serializable {
                 this.imageFile = imageFile;
                 this.publisher = publisher;
                 this.price = price;
-        }
-
-        public Book(Integer id, String ASIN, String title, String imageFile,
-                        String publisher, double price, Set cartes) {
-                super();
-                this.id = id;
-                this.ASIN = ASIN;
-                this.title = title;
-                this.imageFile = imageFile;
-                this.publisher = publisher;
-                this.price = price;
-                this.cartes = cartes;
-        }
-        
-        public Set getCartes() {
-                return cartes;
-        }
-
-        public void setCartes(Set cartes) {
-                this.cartes = cartes;
         }
 
 

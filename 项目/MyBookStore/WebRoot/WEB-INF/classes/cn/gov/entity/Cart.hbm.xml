@@ -10,14 +10,22 @@
             <column name="id" />
             <generator class="native" />
         </id>
-        <many-to-one name="user" class="cn.gov.entity.User" fetch="select" cascade="all">
+        
+        <property name="user_id" type="java.lang.Integer">
             <column name="user_id" />
-        </many-to-one>
-        <many-to-one name="book" class="cn.gov.entity.Book" fetch="select" cascade="all">
-            <column name="book_id" />
-        </many-to-one>
-        <property name="state" type="java.lang.Integer">
-            <column name="state" not-null="true" />
         </property>
+        
+        <property name="book_id" type="java.lang.Integer">
+            <column name="book_id" />
+        </property>
+  
+        <property name="state" type="java.lang.Integer">
+            <column name="state"  />
+        </property>
+        
+        <property name="number" type="java.lang.Integer">
+            <column name="number"  />
+        </property>
+        
     </class>
 </hibernate-mapping>

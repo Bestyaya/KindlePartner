@@ -1,7 +1,10 @@
 package cn.gov.service.impl;
 
+import java.util.List;
+
 import cn.gov.dao.CartDao;
 import cn.gov.entity.Cart;
+import cn.gov.entity.User;
 import cn.gov.service.CartService;
 
 public class CartServiceImpl implements CartService {
@@ -21,6 +24,21 @@ public class CartServiceImpl implements CartService {
                 if(cartDao.saveCart(cart) > 0)
                         return true;
                 return false;
+        }
+        
+        public List<Cart> getAllCart(User user)
+        {
+                return cartDao.getAllCart(user);
+        }
+        
+        public Cart getCart(Integer user_id, Integer book_id)
+        {
+                return cartDao.getCart(user_id, book_id);
+        }
+        
+        public int updateCart(Integer id,Integer number)
+        {
+                return cartDao.updateCart(id,number);
         }
         
 }

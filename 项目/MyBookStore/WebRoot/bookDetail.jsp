@@ -10,7 +10,7 @@
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 <script type="text/javascript">
 function view_cart() {
-	window.location.href = "viewCart.jsp";
+	window.location.href = 'cart_show';
 }
 
 function do_submit() {
@@ -21,16 +21,14 @@ function do_submit() {
 
 function submit() {
 	$.ajax({
-		type : 'post',
 		url : 'cart_submit',
 		dataType : 'json',
 		success : function(result) {
 			if (result == null)
-				return;
-			result = $.parseJSON(result); // 转换为json对象
-			alert(2);
+					return;
+			alert(添加成功);
+			result = $.parseJSON(result);
 			var msg = result.message;
-			alert(3);
 			if (result.success) {
 				alert(msg);
 			} else {

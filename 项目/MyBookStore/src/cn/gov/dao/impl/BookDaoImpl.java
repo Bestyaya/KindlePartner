@@ -8,6 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import cn.gov.dao.BookDao;
 import cn.gov.entity.Book;
+import cn.gov.entity.User;
 
 public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
 
@@ -18,4 +19,11 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
 		return q.list();
 	}
 
+	public Book getBook(Integer id)
+	{
+	        String hql = String.format("from Book as book where id =="+id);
+                Query q = getSession().createQuery(hql);
+                return (Book)q.uniqueResult();
+	}
+	
 }

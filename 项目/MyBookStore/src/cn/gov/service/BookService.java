@@ -9,4 +9,6 @@ public interface BookService {
 	//得到所有的书籍
 	public List<Book> getAllBook();
 	
+	public Book getBook(Integer id);
+	
 }

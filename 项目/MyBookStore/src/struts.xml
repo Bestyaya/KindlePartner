@@ -21,16 +21,16 @@
 			</result>
 			<result name ="success">/index.jsp</result>
 			<result name="login">/login.jsp</result>
-			<result name="error">error.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="cart_*" class="cartAction" method="{1}">
 			<result name="jsonResult" type="json">
 				<param name="root">jsonResult</param>
 			</result>
-			<result name ="success">/index.jsp</result>
+			<result name ="cartes">/viewCart.jsp</result>
 			<result name="login">/login.jsp</result>
-			<result name="error">error.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 	</package>

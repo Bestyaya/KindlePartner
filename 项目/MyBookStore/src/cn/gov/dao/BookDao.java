@@ -8,5 +8,7 @@ public interface BookDao {
 	
 	//得到所有的书籍
 	public List<Book> getBooks();
+	
+	public Book getBook(Integer id);
 
 }

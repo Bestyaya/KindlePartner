@@ -69,6 +69,7 @@
 		<property name="bookService" ref="bookService"></property>
 	</bean>
 	<bean name="cartAction" class="cn.gov.action.CartAction">
+		<property name="bookService" ref="bookService"></property>
 		<property name="cartService" ref="cartService"></property>
 	</bean>
 

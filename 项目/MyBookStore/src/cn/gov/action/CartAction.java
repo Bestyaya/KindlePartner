@@ -1,5 +1,8 @@
 package cn.gov.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import cn.gov.entity.Book;
 import cn.gov.entity.Cart;
 import cn.gov.entity.User;
+import cn.gov.service.BookService;
 import cn.gov.service.CartService;
 import cn.gov.service.UserService;
 import cn.gov.util.JsonResult;
@@ -15,6 +19,7 @@ import cn.gov.util.JsonResult;
 public class CartAction {
 
         private Cart cart;
+        private BookService bookService;
         private String json;
         private CartService cartService;
         private JsonResult jsonResult;
@@ -27,12 +32,12 @@ public class CartAction {
                 this.cart = cart;
         }
 
-        public CartService getCartService() {
-                return cartService;
+        public BookService getBookService() {
+                return bookService;
         }
 
-        public void setCartService(CartService cartService) {
-                this.cartService = cartService;
+        public void setBookService(BookService bookService) {
+                this.bookService = bookService;
         }
         
         public String getJson() {
@@ -43,6 +48,14 @@ public class CartAction {
                 this.json = json;
         }
 
+        public CartService getCartService() {
+                return cartService;
+        }
+
+        public void setCartService(CartService cartService) {
+                this.cartService = cartService;
+        }
+
         public JsonResult getJsonResult() {
                 return jsonResult;
         }
@@ -51,35 +64,61 @@ public class CartAction {
                 this.jsonResult = jsonResult;
         }
 
-        public String error() {
-                return "error";
-        }
-
-        public String submit()
+        public String show()
         {
                 HttpServletRequest request = ServletActionContext.getRequest();
                 HttpSession session = request.getSession();
-                User user = (User)session.getAttribute("user");
-                Book book = (Book)session.getAttribute("booktoadd");
-                Cart cart = new Cart();
-                cart.setUser(user);
-                cart.setBook(book);
-                cart.setState(0);
-                boolean ok = cartService.saveCart(cart);
+
+                List<Book> mybook = new ArrayList<Book>();
+                User user = (User) session.getAttribute("user");
+                List<Cart> cartes = cartService.getAllCart(user);
+                session.setAttribute("cartes",cartes); 
+                return "cartes";
+        }
+        
+        public String submit() {
+
                 jsonResult = new JsonResult();
-                if(ok)
-                {
-                        System.out.println(1);
-                        jsonResult.setSuccess(true);
-                        jsonResult.setMessage("成功加入购物车");
+         
+                HttpServletRequest request = ServletActionContext.getRequest();
+                HttpSession session = request.getSession();
+
+                User user = (User) session.getAttribute("user");
+                Book book = (Book) session.getAttribute("booktoadd");
+
+                if (user == null) {
+                        jsonResult.setSuccess(false);
+                        jsonResult.setMessage("检测到您还未登录，请先登录");
+                        return "jsonResult";
                 }
+         
+                boolean ok;
+                Cart cart = cartService.getCart(user.getId(), book.getId());
+                if(cart == null)
+                {
+                        cart = new Cart();
+                        cart.setNumber(1);
+                        cart.setUser_id(user.getId());
+                        cart.setBook_id(book.getId());
+                        cart.setState(0);
+                        ok = cartService.saveCart(cart);
+                }       
                 else
                 {
-                        System.out.println(2);
+                        if(cartService.updateCart(cart.getId(),cart.getNumber() + 1) > 0)
+                                ok = true;
+                        else
+                                ok = false;
+                }
+                
+                if (ok) {
+                        jsonResult.setSuccess(true);
+                        jsonResult.setMessage("成功加入购物车");
+                } else {
                         jsonResult.setSuccess(false);
                         jsonResult.setMessage("提交失败");
                 }
                 return "jsonResult";
         }
-        
+
 }
