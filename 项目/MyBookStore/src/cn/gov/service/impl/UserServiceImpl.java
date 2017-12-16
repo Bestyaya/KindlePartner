@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUser(user);
 	}
 
+	public int updateUser(User user)
+	{
+	        return userDao.updateUser(user);
+	}
+	
 	public boolean addUser(User user) {
 		if (userDao.addUser(user) > 0)
 			return true;

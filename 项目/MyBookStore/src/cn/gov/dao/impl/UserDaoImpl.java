@@ -30,4 +30,10 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return item.getId();
 	}
 	
+	public int updateUser(User user)
+	{
+	        getHibernateTemplate().update(user);
+                return user.getId();
+	}
+	
 }

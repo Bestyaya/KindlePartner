@@ -9,5 +9,8 @@ public interface UserDao {
 	
 	//添加用户
 	public Integer addUser(User item);
+	
+	//修改用户
+	public int updateUser(User user);
 
 }

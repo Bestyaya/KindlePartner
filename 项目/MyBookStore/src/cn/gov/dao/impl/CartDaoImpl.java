@@ -43,4 +43,10 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao {
                 return q.executeUpdate();
         }
         
+        public int updateCart(Cart cart)
+        {
+                getHibernateTemplate().update(cart);
+                return cart.getId();
+        }
+        
 }

@@ -1,4 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page contentType="text/html;charset=gbk" import="java.util.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>è®¢å•å¤„ç†é¡µé¢</title>
+    <title>¶©µ¥´¦ÀíÒ³Ãæ</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,15 +22,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<link href="css/main.css" type="text/css" rel="stylesheet">
   </head>
   
   <body>
   <jsp:include page="navbar.jsp"></jsp:include>
   		<div class="container">
 
-		<div class="css/main.css">
-			<h1>å‡ºé”™äº†</h1>
+		<div class="starter-template">
+			<form action = "user_bug">
+			ÄúµÄVIPµÈ¼¶Îª${user.vip} <br>
+			ÓÅ»İºóÄúĞèÒªÖ§¸¶${totalMoney * (10 - user.vip) * 0.1}Ôª
+			<input type="submit" value="½áÕË"/>
+			<h1>¿ÉÒÔÊ¹ÓÃÖ§¸¶±¦</h1>
+			<img src="img/pay.jpg" /> 
+			</form>
 		</div>
 
 	</div>

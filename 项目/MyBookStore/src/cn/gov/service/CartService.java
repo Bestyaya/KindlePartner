@@ -11,4 +11,5 @@ public interface CartService {
         public List<Cart> getAllCart(User user);
         public Cart getCart(Integer user_id, Integer book_id);
         public int updateCart(Integer id,  Integer number);
+        public int updateCart(Cart cart);
 }
