@@ -17,7 +17,7 @@
 <link href="css/style.css" type="text/css" rel="stylesheet"
 	rev="stylesheet" />
 <!-- starter-template.js -->
-<link href="js/starter-template.js" type="text/css" rel="stylesheet">
+<link href="css/main.css" type="text/css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
 <link
 	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -29,7 +29,7 @@
 
 		<div class="container">
 
-		<div class="css/main.css">
+		<div class="start-template">
 			<h1>出错了</h1>
 		</div>
 

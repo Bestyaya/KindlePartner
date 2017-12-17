@@ -20,6 +20,7 @@ public class Cart implements java.io.Serializable {
         public Cart() {
         }
         
+        
         public Cart(Integer book_id, Integer user_id, Integer state) {
                 super();
                 this.book_id = book_id;
@@ -27,8 +28,8 @@ public class Cart implements java.io.Serializable {
                 this.state = state;
         }
         
-        public Cart(Integer state) {
-                this.state = state;
+        public Cart(Integer id) {
+                this.id = id;
         }
         
         public Cart(Integer id, Integer book_id, Integer user_id, Integer state) {

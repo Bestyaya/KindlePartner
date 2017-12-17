@@ -77,7 +77,6 @@ input[type="text"],input[type="password"] {
 </head>
 
 <body>
-
 	<!-- 导航栏  -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
@@ -100,7 +99,7 @@ input[type="text"],input[type="password"] {
  	if (user == null)
  		out.print("登录/注册");
  	else
- 		out.print(user.getUsername());
+ 		 response.sendRedirect("user.jsp");
  %> </a>
 				</li>
 				<li><a href="about.jsp">关于</a>

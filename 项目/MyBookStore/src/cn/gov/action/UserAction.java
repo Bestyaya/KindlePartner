@@ -22,6 +22,34 @@ public class UserAction {
         private UserService userService;
         private JsonResult jsonResult;
         private JsonData jsonData;
+        
+        private String oldpassword;
+        private String newpassword;
+        private String newpassword2;
+        
+        public String getOldpassword() {
+                return oldpassword;
+        }
+
+        public void setOldpassword(String oldpassword) {
+                this.oldpassword = oldpassword;
+        }
+
+        public String getNewpassword() {
+                return newpassword;
+        }
+
+        public void setNewpassword(String newpassword) {
+                this.newpassword = newpassword;
+        }
+
+        public String getNewpassword2() {
+                return newpassword2;
+        }
+
+        public void setNewpassword2(String newpassword2) {
+                this.newpassword2 = newpassword2;
+        }
 
         public JsonData getJsonData() {
                 return jsonData;
@@ -74,6 +102,32 @@ public class UserAction {
         //出错
         public String error() {
                 return "error";
+        }
+        
+        public String logout()
+        {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                HttpSession session = request.getSession();
+                session.setAttribute("user",null);
+                return "login";
+        }
+        
+        public String updateInformation()
+        {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                HttpSession session = request.getSession();
+                
+                User user= (User)session.getAttribute("user");
+                if(!user.getPassword().equals(oldpassword))
+                      return   "fail";
+                if(!newpassword.equals(newpassword2))
+                        return "fail";
+                
+                user.setPassword(newpassword);
+                
+                userService.updatePassword(user);
+                
+                return "user";
         }
         
         public String bug()

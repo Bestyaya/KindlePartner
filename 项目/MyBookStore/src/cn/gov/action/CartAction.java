@@ -69,7 +69,6 @@ public class CartAction {
                 HttpServletRequest request = ServletActionContext.getRequest();
                 HttpSession session = request.getSession();
 
-                List<Book> mybook = new ArrayList<Book>();
                 User user = (User) session.getAttribute("user");
                 List<Cart> cartes = cartService.getAllCart(user);
                 session.setAttribute("cartes",cartes); 
@@ -119,6 +118,47 @@ public class CartAction {
                         jsonResult.setMessage("提交失败");
                 }
                 return "jsonResult";
+        }
+        
+        public String deleteAll()
+        {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                HttpSession session = request.getSession();
+                
+               List<Cart> cartes = (List<Cart>)session.getAttribute("cartes");
+               for(Cart cart : cartes)
+                       cartService.deleteCart(cart.getId());
+                
+                show();
+                
+                return "f5";
+        }
+        
+        public String deleteCart()
+        {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                HttpSession session = request.getSession();
+                
+                Integer id = (Integer)session.getAttribute("id");
+                if(id != null) System.out.println(id);
+                else System.out.println("null");
+                cartService.deleteCart(id);
+                
+                show();
+                
+                return "f5";
+        }
+        
+        public String history()
+        {
+                HttpServletRequest request = ServletActionContext.getRequest();
+                HttpSession session = request.getSession();
+
+                User user = (User) session.getAttribute("user");
+                List<Cart> history = cartService.getHistory(user);
+                session.setAttribute("history",history); 
+                System.out.println(history.size());
+                return "history";
         }
 
 }

@@ -46,4 +46,14 @@ public class CartServiceImpl implements CartService {
                 return cartDao.updateCart(cart);
         }
         
+        public List<Cart> getHistory(User user)
+        {
+                return cartDao.getHistory(user);
+        }
+        
+        public void deleteCart(Integer id)
+        {
+                cartDao.deleteCart(id);
+        }
+        
 }

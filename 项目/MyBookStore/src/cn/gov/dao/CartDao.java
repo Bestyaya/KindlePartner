@@ -13,4 +13,6 @@ public interface CartDao {
         public Cart getCart(Integer user_id, Integer book_id);
         public int updateCart(Integer id,Integer number);
         public int updateCart(Cart cart);
+        public void deleteCart(Integer id);
+        public List<Cart> getHistory(User user);
 }

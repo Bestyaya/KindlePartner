@@ -4,7 +4,7 @@
 
 <HTML>
 <HEAD>
-<TITLE>购物车</TITLE>
+<TITLE>购买历史</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=gb2312">
 <LINK href="css/main.css" type=text/css rel=stylesheet>
 </HEAD>
@@ -103,15 +103,13 @@
                 <tr>
                   <td><div align="center">书名</div></td>
                   <td><div align="center">价格</div></td>
-                  <td><div align="center">数量</div></td>
-                  <td><div align="center">总价</div></td>
-                   <td><div align="center"><a href = "cart_deleteAll">清空</a></div></td>
+                  <td><div align="center">数量</div></td>              
                 </tr>
                 <c:set var="totalMoney" value="0" scope="session"></c:set>                 
-                <c:set var="cart1" value="${sessionScope.cartes}" scope="session"/>
+                <c:set var="cart1" value="${sessionScope.history}" scope="session"/>
                 <c:choose>                
-                <c:when test="${empty cartes}">
-                  ${"购物车为空"}
+                <c:when test="${empty history}">
+                  ${"购买历史为空"}
                  <a href='index.jsp'>前去购物</a>
                 </c:when>
                 <c:otherwise>
@@ -125,27 +123,18 @@
                 <c:set var="title" value="${sbook.title}"/>
                 <c:set var="price" value="${sbook.price}"/>
                 <c:set var="quatity" value="${cart.number}"/>
-                <c:set var="totalPrice" value="${quatity * price }"/>
-                <c:set value="${totalMoney+totalPrice}" var="totalMoney" scope="session"></c:set>           
                  <tr>
-                  <td><div align="center">${title}</div></td>
+                  <td><div align="center"><a href="bookDetail.jsp?isbn=${sbook.ASIN }">${title}</a></div></td>
                   <td><div align="center">${price}</div></td>
                   <td><div align="center">${quatity}</div></td>
-                 <td><div align="center">${totalPrice}</div></td>
-                  <td><div align="center"><a href = "cart_deleteCart?id =${cart.id} ">取消</a></div></td>
                 </tr>             
                 	
                 </c:forEach>
                 </c:otherwise>
                 </c:choose>
-                <tr>
-                  <td colspan="3"><div align="right">合计</div></td>
-                  <td>${totalMoney}</td>
-                </tr>
               </table>
               <a href="index.jsp">继续购物</a><br/>
         
-              <a href="processOrder.jsp">提交订单</a>
 			</form>
 				</TBODY>
 			</TABLE>

@@ -49,4 +49,16 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao {
                 return cart.getId();
         }
         
+        public void deleteCart(Integer id)
+        {
+                getHibernateTemplate().delete(new Cart(id));
+        }
+        
+        public List<Cart> getHistory(User user)
+        {
+                String hql = String.format("from Cart as cart where cart.user_id= "+user.getId()+"and cart.state = 1");
+                Query q = getSession().createQuery(hql);
+                return q.list();
+        }
+        
 }

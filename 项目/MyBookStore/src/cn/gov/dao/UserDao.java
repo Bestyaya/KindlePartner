@@ -12,5 +12,8 @@ public interface UserDao {
 	
 	//修改用户
 	public int updateUser(User user);
+	
+	//修改密码
+	public void updatePassword(User user);
 
 }

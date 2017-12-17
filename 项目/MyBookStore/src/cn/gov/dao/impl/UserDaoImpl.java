@@ -25,7 +25,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	public Integer addUser(User item) {
 
 		item.setVip(0);   //初始化VIP等级
-		item.setBalance(100.00);  //初始余额
+		item.setBalance(10000.00);  //初始余额
 		getHibernateTemplate().save(item);
 		return item.getId();
 	}
@@ -34,6 +34,11 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	{
 	        getHibernateTemplate().update(user);
                 return user.getId();
+	}
+	
+	public void updatePassword(User user)
+	{
+	        getHibernateTemplate().update(user);
 	}
 	
 }

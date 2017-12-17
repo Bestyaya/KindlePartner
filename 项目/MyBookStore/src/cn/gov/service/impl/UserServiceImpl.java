@@ -33,4 +33,9 @@ public class UserServiceImpl implements UserService {
 		return false;
 	}
 
+	public void updatePassword(User user)
+	{
+	        userDao.updatePassword(user);
+	}
+	
 }
