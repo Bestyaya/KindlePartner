@@ -9,6 +9,7 @@
 <LINK href="css/main.css" type=text/css rel=stylesheet>
 </HEAD>
 <BODY>
+<jsp:include page="navbar.jsp"></jsp:include>
 <CENTER>
 <TABLE cellSpacing=0 cellPadding=0 width=778 bgColor=#ffffff
 	background=img/top1bg.jpg border=0>

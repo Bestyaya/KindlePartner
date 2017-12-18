@@ -24,6 +24,7 @@ function submit() {
 		url : 'cart_submit',
 		dataType : 'json',
 		success : function(result) {
+			alert(result);
 			if (result == null)
 					return;
 			alert(Ìí¼Ó³É¹¦);

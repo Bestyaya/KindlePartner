@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-12-16 22:20:45
+Date: 2017-12-17 20:23:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,12 +49,16 @@ CREATE TABLE `cart` (
   PRIMARY KEY (`id`),
   KEY `key1` (`user_id`),
   KEY `key2` (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cart
 -- ----------------------------
-INSERT INTO `cart` VALUES ('22', '2', '2', '1', '2');
+INSERT INTO `cart` VALUES ('22', '2', '2', '1', '9');
+INSERT INTO `cart` VALUES ('25', '5', '2', '1', '1');
+INSERT INTO `cart` VALUES ('26', '5', '1', '1', '1');
+INSERT INTO `cart` VALUES ('27', '1', '1', '1', '2');
+INSERT INTO `cart` VALUES ('29', '1', '2', '0', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -68,11 +72,11 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('123', '123456', '2', '1230', '1', '123@163.com');
-INSERT INTO `user` VALUES ('dcr', '123456', '0', '-120', '2', '123@163.com');
-INSERT INTO `user` VALUES ('321', '321', '0', '100', '3', '321@163.com');
+INSERT INTO `user` VALUES ('123', '123456', '2', '1177', '1', '123@163.com');
+INSERT INTO `user` VALUES ('dcr', '123456', '0', '800', '2', '123@163.com');
+INSERT INTO `user` VALUES ('321', '123', '0', '800', '5', '123@163.com');

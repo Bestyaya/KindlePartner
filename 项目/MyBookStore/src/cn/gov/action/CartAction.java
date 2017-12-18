@@ -70,6 +70,7 @@ public class CartAction {
                 HttpSession session = request.getSession();
 
                 User user = (User) session.getAttribute("user");
+                if(user == null) return "noLogin";
                 List<Cart> cartes = cartService.getAllCart(user);
                 session.setAttribute("cartes",cartes); 
                 return "cartes";
@@ -88,9 +89,9 @@ public class CartAction {
                 if (user == null) {
                         jsonResult.setSuccess(false);
                         jsonResult.setMessage("检测到您还未登录，请先登录");
-                        return "jsonResult";
+                        return "noLogin";
                 }
-         
+                
                 boolean ok;
                 Cart cart = cartService.getCart(user.getId(), book.getId());
                 if(cart == null)
