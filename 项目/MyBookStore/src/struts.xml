@@ -37,5 +37,12 @@
 			<result name="noLogin">/noLogin.jsp</result>
 		</action>
 		
+		<action name="admin_*" class="adminAction" method="{1}">
+			<result name="jsonResult" type="json">
+				<param name="root">jsonResult</param>
+			</result>
+			<result name="login">/admin/login.jsp</result>
+		</action>
+		
 	</package>
 </struts>    

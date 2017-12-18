@@ -24,6 +24,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	//添加用户
 	public Integer addUser(User item) {
 
+		item.setState(1);
 		item.setVip(0);   //初始化VIP等级
 		item.setBalance(10000.00);  //初始余额
 		getHibernateTemplate().save(item);

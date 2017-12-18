@@ -11,15 +11,16 @@ public class User implements java.io.Serializable {
 
 	// Fields
 	private String username;
-        private String password;
+	private String password;
 	private Integer vip;
 	private Integer id;
 	private String email;
 	private Double balance;
+	private Integer state;
 
 	// Constructors
 
-        /** default constructor */
+	/** default constructor */
 	public User() {
 	}
 
@@ -49,9 +50,9 @@ public class User implements java.io.Serializable {
 		this.vip = vip;
 		this.balance = balance;
 	}
-	
-	public User(Integer id,String username, String password, Integer vip, Double balance,
-			String email) {
+
+	public User(Integer id, String username, String password, Integer vip,
+			Double balance, String email) {
 		this.id = id;
 		this.email = email;
 		this.username = username;
@@ -65,10 +66,18 @@ public class User implements java.io.Serializable {
 		return id;
 	}
 
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}

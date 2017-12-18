@@ -1,22 +1,38 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 123
-Source Server Version : 50717
+Source Server         : asdweaf
+Source Server Version : 50716
 Source Host           : localhost:3306
 Source Database       : kindledb
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-12-17 20:23:56
+Date: 2017-12-18 17:59:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for book
+-- Table structure for `admin`
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES ('1', 'admin', '123456');
+
+-- ----------------------------
+-- Table structure for `book`
 -- ----------------------------
 DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book` (
@@ -37,7 +53,7 @@ INSERT INTO `book` VALUES ('9787302476580', '算法竞赛入门经典——习�
 INSERT INTO `book` VALUES ('9787302356288', ' 算法竞赛入门经典（第2版）', '03.jpg', '清华大学出版社', '35.6', '3');
 
 -- ----------------------------
--- Table structure for cart
+-- Table structure for `cart`
 -- ----------------------------
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
@@ -61,7 +77,7 @@ INSERT INTO `cart` VALUES ('27', '1', '1', '1', '2');
 INSERT INTO `cart` VALUES ('29', '1', '2', '0', '1');
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -71,12 +87,13 @@ CREATE TABLE `user` (
   `balance` double(255,0) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('123', '123456', '2', '1177', '1', '123@163.com');
-INSERT INTO `user` VALUES ('dcr', '123456', '0', '800', '2', '123@163.com');
-INSERT INTO `user` VALUES ('321', '123', '0', '800', '5', '123@163.com');
+INSERT INTO `user` VALUES ('123', '123456', '2', '1177', '1', '123@163.com', '1');
+INSERT INTO `user` VALUES ('dcr', '123456', '0', '800', '2', '123@163.com', '1');
+INSERT INTO `user` VALUES ('321', '123', '0', '800', '5', '123@163.com', '1');
