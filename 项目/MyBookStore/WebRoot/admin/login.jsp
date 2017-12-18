@@ -18,16 +18,16 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<link href="js/jquery-easyui-1.5.1/themes/default/easyui.css"
+		<link href="../js/jquery-easyui-1.5.1/themes/default/easyui.css"
 			rel="stylesheet" />
-		<link href="js/jquery-easyui-1.5.1/themes/icon.css" rel="stylesheet" />
+		<link href="../js/jquery-easyui-1.5.1/themes/icon.css" rel="stylesheet" />
 		<script src="js/jquery-easyui-1.5.1/jquery.min.js"
 			type="text/javascript"></script>
-		<script src="js/jquery-easyui-1.5.1/jquery.easyui.min.js"
+		<script src="../js/jquery-easyui-1.5.1/jquery.easyui.min.js"
 			type="text/javascript"></script>
-		<script src="js/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"
+		<script src="../js/jquery-easyui-1.5.1/locale/easyui-lang-zh_CN.js"
 			type="text/javascript" charset="utf-8"></script>
-		<link href="js/jquery-easyui-1.5.1/themes/color.css" rel="stylesheet" />
+		<link href="../js/jquery-easyui-1.5.1/themes/color.css" rel="stylesheet" />
 		<!--用百度的静态资源库的cdn安装bootstrap环境-->
 		<link
 			href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css"
@@ -47,7 +47,7 @@
 
 		<script type="text/javascript">
 	function doLogin() {
-		if ($('#loginid').val() == "") {
+		if ($('#name').val() == "") {
 			$.messager.alert("提示信息", "请输入账号信息。", "info");
 		} else if ($('#password').val() == "") {
 			$.messager.alert("提示信息", "请输入密码信息。", "info");
@@ -130,7 +130,7 @@
 								<label for="username" class="sr-only">
 									Author ID
 								</label>
-								<input type="text" placeholder="Author ID" class="form-control"
+								<input id = "name" type="text" placeholder="Author ID" class="form-control"
 									name="admin.name" id="username" value="">
 							</div>
 							<div class="input-group input-group-lg">
@@ -139,7 +139,7 @@
 								<label for="password" class="sr-only">
 									Password
 								</label>
-								<input type="password" placeholder="Password"
+								<input id = "password" type="password" placeholder="Password"
 									class="form-control" name="admin.password" id="password">
 							</div>
 						</div>
