@@ -1,5 +1,7 @@
 package cn.gov.dao;
 
+import java.util.List;
+
 import cn.gov.entity.User;
 
 public interface UserDao {
@@ -15,5 +17,8 @@ public interface UserDao {
 	
 	//修改密码
 	public void updatePassword(User user);
+	
+	//得到所有的用户
+	public List<User> getAllUser();
 
 }

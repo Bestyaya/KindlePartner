@@ -82,6 +82,8 @@
 	</bean>
 	<bean name="adminAction" class="cn.gov.action.AdminAction">
 		<property name="adminService" ref="adminService"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="bookService" ref="bookService"></property>
 	</bean>
 
 </beans>

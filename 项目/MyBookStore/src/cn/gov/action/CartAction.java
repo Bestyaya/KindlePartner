@@ -23,7 +23,16 @@ public class CartAction {
         private String json;
         private CartService cartService;
         private JsonResult jsonResult;
+        private Integer delete_id;
+        
+        public Integer getDelete_id() {
+                return delete_id;
+        }
 
+        public void setDelete_id(Integer delete_id) {
+                this.delete_id = delete_id;
+        }
+        
         public Cart getCart() {
                 return cart;
         }
@@ -64,6 +73,7 @@ public class CartAction {
                 this.jsonResult = jsonResult;
         }
 
+        //显示图书
         public String show()
         {
                 HttpServletRequest request = ServletActionContext.getRequest();
@@ -76,6 +86,7 @@ public class CartAction {
                 return "cartes";
         }
         
+        //加入购物车
         public String submit() {
 
                 jsonResult = new JsonResult();
@@ -121,6 +132,7 @@ public class CartAction {
                 return "jsonResult";
         }
         
+        //清空购物车
         public String deleteAll()
         {
                 HttpServletRequest request = ServletActionContext.getRequest();
@@ -135,21 +147,19 @@ public class CartAction {
                 return "f5";
         }
         
+        //清空购物车
         public String deleteCart()
         {
-                HttpServletRequest request = ServletActionContext.getRequest();
-                HttpSession session = request.getSession();
-                
-                Integer id = (Integer)session.getAttribute("id");
-                if(id != null) System.out.println(id);
+                if(delete_id != null) System.out.println(delete_id);
                 else System.out.println("null");
-                cartService.deleteCart(id);
+                cartService.deleteCart(delete_id);
                 
                 show();
                 
                 return "f5";
         }
         
+        //购买历史
         public String history()
         {
                 HttpServletRequest request = ServletActionContext.getRequest();

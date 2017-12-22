@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="cn.gov.entity.User"%>
+<%@ page import="cn.gov.entity.Admin" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -48,11 +49,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li class="active"><a href="index.jsp">主页</a>
 				</li>
 				<li><a href="login.jsp"> <%
+ 	Admin admin =(Admin)session.getAttribute("admin");
  	User user = (User) session.getAttribute("user");
- 	if (user == null)
- 		out.print("登录/注册");
- 	else
+ 	if (admin != null)
+ 		out.print(admin.getName());
+ 	else if(user != null)
  		out.print(user.getUsername());
+ 	else 
+ 		out.print("登录/注册");
  %> </a>
 				</li>
 				<li><a href="about.jsp">关于</a>

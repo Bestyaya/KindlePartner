@@ -16,6 +16,10 @@ public class Book implements Serializable {
         // 构造方法
         public Book() {
         }
+        
+        public Book(Integer id) {
+                this.id = id;
+        }
 
         public Book(Integer id, String ASIN, String title, String imageFile,
                         String publisher, double price) {

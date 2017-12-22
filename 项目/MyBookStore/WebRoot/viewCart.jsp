@@ -132,7 +132,7 @@
                   <td><div align="center">${price}</div></td>
                   <td><div align="center">${quatity}</div></td>
                  <td><div align="center">${totalPrice}</div></td>
-                  <td><div align="center"><a href = "cart_deleteCart?id =${cart.id} ">取消</a></div></td>
+                  <td><div align="center"><a href = "cart_deleteCart?delete_id =${cart.id} ">取消</a></div></td>
                 </tr>             
                 	
                 </c:forEach>

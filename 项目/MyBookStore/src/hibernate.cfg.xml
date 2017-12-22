@@ -7,7 +7,7 @@
 <hibernate-configuration>
 
 <session-factory>
-    <property name="connection.autocommit">true </property>  
+	<property name="connection.autocommit">true</property>
 	<property name="hbm2ddl.auto">update</property>
 	<property name="dialect">
 		org.hibernate.dialect.MySQLDialect
@@ -24,6 +24,7 @@
 	<mapping resource="cn/gov/entity/User.hbm.xml" />
 	<mapping resource="cn/gov/entity/Book.hbm.xml" />
 	<mapping resource="cn/gov/entity/Cart.hbm.xml" />
+	<mapping resource="cn/gov/entity/Admin.hbm.xml" />
 
 </session-factory>
 

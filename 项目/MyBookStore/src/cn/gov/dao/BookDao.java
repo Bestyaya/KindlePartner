@@ -10,5 +10,8 @@ public interface BookDao {
 	public List<Book> getBooks();
 	
 	public Book getBook(Integer id);
+	
+	//删除书籍
+        public void deleteBook(Integer id);
 
 }

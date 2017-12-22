@@ -14,11 +14,10 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao {
 	public Admin getAdmin(Admin admin) {
 		// TODO Auto-generated method stub
 		
-		String hql =  String.format("from User where username = '%s' and password " +
+		String hql =  String.format("from Admin where name = '%s' and password " +
 				"= '%s'",admin.getName(),admin.getPassword());
 		Session session = HibernateSessionFactory.getSession();
 		Query q = session.createQuery(hql);
-		
 		return (Admin)q.uniqueResult();
 	}
 

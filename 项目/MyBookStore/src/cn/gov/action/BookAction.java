@@ -57,6 +57,7 @@ public class BookAction {
 		return "error";
 	}
 
+	//获得所有图书
 	public String getBooks()
 	{
 		List<Book> books = bookService.getAllBook();

@@ -1,5 +1,7 @@
 package cn.gov.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -40,6 +42,13 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	public void updatePassword(User user)
 	{
 	        getHibernateTemplate().update(user);
+	}
+	
+	public List<User> getAllUser()
+	{
+	        String hql = "from User";
+                Query q = getSession().createQuery(hql);
+                return q.list();
 	}
 	
 }

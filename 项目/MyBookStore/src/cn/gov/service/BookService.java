@@ -11,4 +11,7 @@ public interface BookService {
 	
 	public Book getBook(Integer id);
 	
+	//删除书籍
+	public void deleteBook(Integer id);
+	
 }

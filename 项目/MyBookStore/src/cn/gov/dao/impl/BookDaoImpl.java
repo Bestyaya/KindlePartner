@@ -8,6 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import cn.gov.dao.BookDao;
 import cn.gov.entity.Book;
+import cn.gov.entity.Cart;
 import cn.gov.entity.User;
 
 public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
@@ -25,5 +26,11 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
                 Query q = getSession().createQuery(hql);
                 return (Book)q.uniqueResult();
 	}
+	
+	//删除书籍
+        public void deleteBook(Integer id)
+        {
+                getHibernateTemplate().delete(new Book(id));
+        }
 	
 }

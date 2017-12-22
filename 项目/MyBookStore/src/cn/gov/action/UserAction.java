@@ -104,6 +104,7 @@ public class UserAction {
                 return "error";
         }
         
+        //退出
         public String logout()
         {
                 HttpServletRequest request = ServletActionContext.getRequest();
@@ -112,6 +113,7 @@ public class UserAction {
                 return "login";
         }
         
+        //更新信息
         public String updateInformation()
         {
                 HttpServletRequest request = ServletActionContext.getRequest();
@@ -130,6 +132,7 @@ public class UserAction {
                 return "user";
         }
         
+        //购买功能
         public String bug()
         {
                 HttpServletRequest request = ServletActionContext.getRequest();

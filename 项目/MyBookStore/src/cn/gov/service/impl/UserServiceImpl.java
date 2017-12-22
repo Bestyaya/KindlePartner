@@ -1,5 +1,7 @@
 package cn.gov.service.impl;
 
+import java.util.List;
+
 import cn.gov.dao.UserDao;
 import cn.gov.entity.User;
 import cn.gov.service.UserService;
@@ -36,6 +38,12 @@ public class UserServiceImpl implements UserService {
 	public void updatePassword(User user)
 	{
 	        userDao.updatePassword(user);
+	}
+	
+	//得到所有的用户
+	public List<User> getAllUser()
+	{
+	        return userDao.getAllUser();
 	}
 	
 }

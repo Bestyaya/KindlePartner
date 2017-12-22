@@ -13,13 +13,12 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao;
 	}
 
-	public void setAdminDao(AdminDao admindao) {
+	public void setAdminDao(AdminDao adminDao) {
 		this.adminDao = adminDao;
 	}
 	
 	public Admin login(Admin admin) {
 		// TODO Auto-generated method stub
-
 		return adminDao.getAdmin(admin);
 	}
 

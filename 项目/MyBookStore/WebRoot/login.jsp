@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="cn.gov.entity.User"%>
+<%@ page import = "cn.gov.entity.Admin" %>
 <%
         String path = request.getContextPath();
         String basePath = request.getScheme() + "://"
@@ -92,14 +93,18 @@ input[type="text"],input[type="password"] {
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="index.jsp">主页</a>
+				<li class="active"><a href="start.jsp">主页</a>
 				</li>
 				<li><a href="login.jsp"> <%
+ 	Admin admin = (Admin)session.getAttribute("admin");
  	User user = (User) session.getAttribute("user");
- 	if (user == null)
- 		out.print("登录/注册");
+ 	if(admin != null)
+ 			response.sendRedirect("admin/bookManager.jsp");
+ 	if (user != null)
+ 			response.sendRedirect("user.jsp");
  	else
- 		 response.sendRedirect("user.jsp");
+ 			out.print("登录/注册");
+ 		
  %> </a>
 				</li>
 				<li><a href="about.jsp">关于</a>

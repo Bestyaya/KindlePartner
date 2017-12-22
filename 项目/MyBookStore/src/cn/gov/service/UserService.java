@@ -1,5 +1,7 @@
 package cn.gov.service;
 
+import java.util.List;
+
 import cn.gov.entity.User;
 
 public interface UserService {
@@ -8,5 +10,6 @@ public interface UserService {
 	public boolean addUser(User user);
 	public int updateUser(User user);
 	public void updatePassword(User user);
+	public List<User> getAllUser();
 
 }

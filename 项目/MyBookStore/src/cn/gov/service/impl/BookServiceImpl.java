@@ -25,9 +25,16 @@ public class BookServiceImpl implements BookService {
                 return bookDao.getBooks(); 
         }
 
+        //根据id得到特定的书籍
         public Book getBook(Integer id)
         {
                 return bookDao.getBook(id);
+        }
+        
+      //删除书籍
+        public void deleteBook(Integer id)
+        {
+                bookDao.deleteBook(id);
         }
 
 }
