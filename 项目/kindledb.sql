@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : asdweaf
-Source Server Version : 50716
+Source Server         : 123
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : kindledb
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-12-18 17:59:43
+Date: 2017-12-23 18:11:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `admin`
+-- Table structure for admin
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` VALUES ('1', 'admin', '123456');
 
 -- ----------------------------
--- Table structure for `book`
+-- Table structure for book
 -- ----------------------------
 DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book` (
@@ -53,7 +53,7 @@ INSERT INTO `book` VALUES ('9787302476580', '算法竞赛入门经典——习�
 INSERT INTO `book` VALUES ('9787302356288', ' 算法竞赛入门经典（第2版）', '03.jpg', '清华大学出版社', '35.6', '3');
 
 -- ----------------------------
--- Table structure for `cart`
+-- Table structure for cart
 -- ----------------------------
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
@@ -77,7 +77,7 @@ INSERT INTO `cart` VALUES ('27', '1', '1', '1', '2');
 INSERT INTO `cart` VALUES ('29', '1', '2', '0', '1');
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
