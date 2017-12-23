@@ -21,4 +21,8 @@ public interface UserDao {
 	//得到所有的用户
 	public List<User> getAllUser();
 
+	public void kickAndUnkick(User user);
+	
+	public User getUserById(Integer id);
+	
 }

@@ -46,4 +46,13 @@ public class UserServiceImpl implements UserService {
 	        return userDao.getAllUser();
 	}
 	
+	public User getUserById(Integer id)
+	{
+	        return userDao.getUserById(id);
+	}
+	
+	public void kickAndUnkick(User user)
+	{
+	        userDao.kickAndUnkick(user);
+	}
 }

@@ -14,29 +14,85 @@
 <base href="<%=basePath%>">
 
 <title>登录</title>
+<jsp:include page="base/stylebase.jsp" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-
-<!--用百度的静态资源库的cdn安装bootstrap环境-->
+<link href="css/style.css" type="text/css" rel="stylesheet"
+	rev="stylesheet" />
+<!-- Bootstrap core CSS -->
 <link
-	href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
-<!--font-awesome 核心我CSS 文件-->
-<link
-	href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- 在bootstrap.min.js 之前引入 -->
-<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
-<!-- Bootstrap 核心 JavaScript 文件 -->
-<script
-	src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<!--jquery.validate-->
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="js/login.js" charset="utf-8"></script>
-
+<script type="text/javascript">
+		function checkData(){
+			if($('#loginid').val()==""){
+				$.messager.alert("提示信息", "请输入账号信息。", "info");
+			}else if($('#password').val()==""){
+				$.messager.alert("提示信息", "请输入密码信息。", "info");
+			}else{
+				doLogin();
+			}
+		}
+		
+		//执行登录
+		/**
+		 * 返回的数据的格式为：{"json":{},"user":{}}
+		 * @memberOf {TypeName} 
+		 * @return {TypeName} 
+		 */
+		function doLogin(){
+            $('#login_form').form('submit',{
+                url: 'user_login',
+                onSubmit: function(){
+                    return $(this).form('validate');
+                },
+                success: function(result){
+                    if (result == null) return;
+                    result = $.parseJSON(result);    //转换为json对象
+                    var msg = result.message;
+                    if (result.success) {
+                        $.messager.alert("信息提示", msg, "info", function () {
+                            window.location.href = 'book_getBooks';
+                        })
+                    }else{
+                        $.messager.alert("错误", "操作失败！" + msg, "error");
+                    }
+                }
+            });
+		}
+		function re(){
+			if($('#loginid').val()==""){
+				$.messager.alert("提示信息", "请输入账号信息。", "info");
+			}else if($('#password').val()==""){
+				$.messager.alert("提示信息", "请输入密码信息。", "info");
+			}else{
+				doRegister();
+			}
+		
+		function doRegister(){
+            $('#register_form').form('submit',{
+                url: 'user_register',
+                onSubmit: function(){
+                    return $(this).form('validate');
+                },
+                success: function(result){
+                    if (result == null) return;
+                    result = $.parseJSON(result);    //转换为json对象
+                    var msg = result.message;
+                    if (result.success) {
+                        $.messager.alert("信息提示", msg, "info", function () {
+                        })
+                    }else{
+                        $.messager.alert("错误", "操作失败！" + msg, "error");
+                    }
+                }
+            });
+		}
+	</script>
 <style type="text/css">
 body {
 	background: url(img/login.jpg) no-repeat;
@@ -118,7 +174,7 @@ input[type="text"],input[type="password"] {
 		<div class="container">
 			<div class="form row">
 				<form class="form-horizontal col-sm-offset-3 col-md-offset-3"
-					id="login_form" action="user_login" method="post">
+					id="login_form" method="post">
 					<h3 class="form-title">Login to your account</h3>
 					<div class="col-sm-9 col-md-9">
 						<div class="form-group">
@@ -140,7 +196,7 @@ input[type="text"],input[type="password"] {
 						</div>
 						<div class="form-group">
 							<input type="submit" id="login_btn"
-								class="btn btn-success pull-right" value="Login " />
+								class="btn btn-success pull-right" value="Login "  onclick() = "checkData()" />
 						</div>
 					</div>
 				</form>
@@ -148,7 +204,7 @@ input[type="text"],input[type="password"] {
 
 			<div class="form row">
 				<form class="form-horizontal col-sm-offset-3 col-md-offset-3"
-					name="register_form" id="register_form" action="user_register">
+					name="register_form" id="register_form" >
 					<h3 class="form-title">Login to your account</h3>
 					<div class="col-sm-9 col-md-9">
 						<div class="form-group">
@@ -173,9 +229,9 @@ input[type="text"],input[type="password"] {
 								name="user.email" />
 						</div>
 						<div class="form-group">
-							<input type="submit" id="reg_btn"
-								class="btn btn-success pull-right" value="Sign Up " /> <input
-								type="submit" class="btn btn-info pull-left" id="back_btn"
+							<input type="button" id="reg_btn"
+								class="btn btn-success pull-right"  onclick()="re()" value="Sign Up " /> <input
+								type="button" class="btn btn-info pull-left" id="back_btn"
 								value="Back" />
 						</div>
 					</div>

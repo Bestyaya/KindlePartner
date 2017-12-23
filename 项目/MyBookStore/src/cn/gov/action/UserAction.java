@@ -161,6 +161,12 @@ public class UserAction {
 
                 user = userService.login(user); // 判断是否登录成功
                 if (user != null) {
+                        if(user.getId() == 1)
+                        {
+                                jsonResult.setSuccess(false);
+                                jsonResult.setMessage("登录失败，您已被封号！");
+                                return "jsonResult";
+                        }
                         HttpServletRequest request = ServletActionContext
                                         .getRequest();
                         HttpSession session = request.getSession();

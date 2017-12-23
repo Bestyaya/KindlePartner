@@ -23,7 +23,16 @@ public class AdminAction {
 	private BookService bookService;
         private UserService userService;
         private Integer delete_id;
+        private Integer id;
         
+        public Integer getId() {
+                return id;
+        }
+
+        public void setId(Integer id) {
+                this.id = id;
+        }
+
         public Integer getDelete_id() {
                 return delete_id;
         }
@@ -136,19 +145,27 @@ public class AdminAction {
                 HttpSession session = request.getSession();
                 
                 List<User> users = userService.getAllUser();   
-                System.out.println(users.size());
                 
                 session.setAttribute("users", users);
                 
                 return "user";
         }
         
+        //下架图书
         public String deleteBook()
         {
                 
                 bookService.deleteBook(delete_id);  //根据id删除图书
                 
                 return bookManager();  //刷新
+        }
+        
+        //封号和解封号
+        public String kickAndUnkick()
+        {
+                User u = userService.getUserById(id);  //得到user
+                userService.kickAndUnkick(u);  //解封号
+                return userManager();
         }
 
 }

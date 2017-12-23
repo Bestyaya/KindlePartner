@@ -64,8 +64,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <c:forEach items="${users}"  var="user" varStatus="count">
                  <tr>
                   <td><div align="center">${user.username}</div></td>
-                  <td><div align="center"><a href = "admin_kickAndUnkick ">封号</a></div></td>
-                 <td><div align="center"><a href = "admin_kickAndUnkick">解封</a></div></td>
+                  <td><div align="center"><a href = "admin_kickAndUnkick?id = ${user.id} ">封号</a></div></td>
+                 <td><div align="center"><a href = "admin_kickAndUnkick?id=${user.id }">解封</a></div></td>
                 </tr>              
                 </c:forEach>
                 </c:otherwise>

@@ -11,5 +11,7 @@ public interface UserService {
 	public int updateUser(User user);
 	public void updatePassword(User user);
 	public List<User> getAllUser();
+	public User getUserById(Integer id);
+	public void kickAndUnkick(User user);
 
 }
