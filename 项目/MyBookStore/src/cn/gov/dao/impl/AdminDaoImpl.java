@@ -11,6 +11,7 @@ import cn.gov.entity.User;
 
 public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao {
 
+        //得到姓名和密码得到管理员
 	public Admin getAdmin(Admin admin) {
 		// TODO Auto-generated method stub
 		
@@ -28,6 +29,7 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao {
 		return item.getId();
 	}
 	
+	//
 	public int updateAdmin(Admin admin)
 	{
 	        getHibernateTemplate().update(admin);

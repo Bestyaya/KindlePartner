@@ -13,6 +13,7 @@ import cn.gov.entity.User;
 
 public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
 
+        //得到所有的书籍
 	public List<Book> getBooks() {
 		// TODO Auto-generated method stub
 		String hql = "from Book";
@@ -20,6 +21,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
 		return q.list();
 	}
 
+	//根据id得到书籍
 	public Book getBook(Integer id)
 	{
 	        String hql = String.format("from Book as book where id =="+id);
@@ -27,7 +29,7 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao {
                 return (Book)q.uniqueResult();
 	}
 	
-	//删除书籍
+	//根据删除书籍
         public void deleteBook(Integer id)
         {
                 getHibernateTemplate().delete(new Book(id));

@@ -18,23 +18,27 @@ public class UserServiceImpl implements UserService {
 		this.userDao = userDao;
 	}
 
+	//登录
 	public User login(User user) {
 		// TODO Auto-generated method stub
 
 		return userDao.getUser(user);
 	}
 
+	//更改密码
 	public int updateUser(User user)
 	{
 	        return userDao.updateUser(user);
 	}
 	
+	//添加用户
 	public boolean addUser(User user) {
 		if (userDao.addUser(user) > 0)
 			return true;
 		return false;
 	}
 
+	//更改密码
 	public void updatePassword(User user)
 	{
 	        userDao.updatePassword(user);
@@ -46,11 +50,13 @@ public class UserServiceImpl implements UserService {
 	        return userDao.getAllUser();
 	}
 	
+	//根据主键得到用户
 	public User getUserById(Integer id)
 	{
 	        return userDao.getUserById(id);
 	}
 	
+	//封号和解封号
 	public void kickAndUnkick(User user)
 	{
 	        userDao.kickAndUnkick(user);

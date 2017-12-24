@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
                 return bookDao.getBook(id);
         }
         
-      //删除书籍
+        //删除书籍
         public void deleteBook(Integer id)
         {
                 bookDao.deleteBook(id);

@@ -17,6 +17,7 @@ import cn.gov.util.JsonResult;
 
 public class AdminAction {
 
+        private User user;
 	private Admin admin;
 	private JsonResult jsonResult;
 	private AdminService adminService;
@@ -39,6 +40,14 @@ public class AdminAction {
 
         public void setDelete_id(Integer delete_id) {
                 this.delete_id = delete_id;
+        }
+        
+        public User getUser() {
+                return user;
+        }
+
+        public void setUser(User user) {
+                this.user = user;
         }
 
         public BookService getBookService() {
@@ -163,6 +172,8 @@ public class AdminAction {
         //封号和解封号
         public String kickAndUnkick()
         {
+                if(id != null) System.out.println(id);
+                else System.out.println("null");
                 User u = userService.getUserById(id);  //得到user
                 userService.kickAndUnkick(u);  //解封号
                 return userManager();

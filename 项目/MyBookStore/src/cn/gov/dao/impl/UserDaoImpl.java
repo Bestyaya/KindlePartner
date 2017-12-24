@@ -12,6 +12,7 @@ import cn.gov.entity.User;
 
 public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 
+        //得到用户
 	public User getUser(User user) {
 		// TODO Auto-generated method stub
 		
@@ -33,17 +34,20 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 		return item.getId();
 	}
 	
+	//更新用户信息
 	public int updateUser(User user)
 	{
 	        getHibernateTemplate().update(user);
                 return user.getId();
 	}
 	
+	//更改密码
 	public void updatePassword(User user)
 	{
 	        getHibernateTemplate().update(user);
 	}
 	
+	//得到所有的用户
 	public List<User> getAllUser()
 	{
 	        String hql = "from User";
@@ -61,7 +65,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
                 return (User)q.uniqueResult();
 	}
 	
-	// !user.state
+	// 更改用户的状态
 	public void kickAndUnkick(User user)
 	{
 	        if(user.getId() == 1) user.setId(0);

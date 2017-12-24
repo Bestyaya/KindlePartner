@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="cn.gov.entity.User"%>
-<%@ page import = "cn.gov.entity.Admin" %>
+<%@ page import="cn.gov.entity.Admin"%>
 <%
         String path = request.getContextPath();
         String basePath = request.getScheme() + "://"
@@ -12,87 +12,25 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-
 <title>登录</title>
-<jsp:include page="base/stylebase.jsp" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
-<link href="css/style.css" type="text/css" rel="stylesheet"
-	rev="stylesheet" />
-<!-- Bootstrap core CSS -->
+<title>bootstrap案例</title>
+<!--用百度的静态资源库的cdn安装bootstrap环境-->
+<!-- Bootstrap 核心 CSS 文件 -->
 <link
-	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet">
-<script type="text/javascript">
-		function checkData(){
-			if($('#loginid').val()==""){
-				$.messager.alert("提示信息", "请输入账号信息。", "info");
-			}else if($('#password').val()==""){
-				$.messager.alert("提示信息", "请输入密码信息。", "info");
-			}else{
-				doLogin();
-			}
-		}
-		
-		//执行登录
-		/**
-		 * 返回的数据的格式为：{"json":{},"user":{}}
-		 * @memberOf {TypeName} 
-		 * @return {TypeName} 
-		 */
-		function doLogin(){
-            $('#login_form').form('submit',{
-                url: 'user_login',
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    if (result == null) return;
-                    result = $.parseJSON(result);    //转换为json对象
-                    var msg = result.message;
-                    if (result.success) {
-                        $.messager.alert("信息提示", msg, "info", function () {
-                            window.location.href = 'book_getBooks';
-                        })
-                    }else{
-                        $.messager.alert("错误", "操作失败！" + msg, "error");
-                    }
-                }
-            });
-		}
-		function re(){
-			if($('#loginid').val()==""){
-				$.messager.alert("提示信息", "请输入账号信息。", "info");
-			}else if($('#password').val()==""){
-				$.messager.alert("提示信息", "请输入密码信息。", "info");
-			}else{
-				doRegister();
-			}
-		
-		function doRegister(){
-            $('#register_form').form('submit',{
-                url: 'user_register',
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    if (result == null) return;
-                    result = $.parseJSON(result);    //转换为json对象
-                    var msg = result.message;
-                    if (result.success) {
-                        $.messager.alert("信息提示", msg, "info", function () {
-                        })
-                    }else{
-                        $.messager.alert("错误", "操作失败！" + msg, "error");
-                    }
-                }
-            });
-		}
-	</script>
+<!--font-awesome 核心我CSS 文件-->
+<link
+	href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<!-- 在bootstrap.min.js 之前引入 -->
+<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+<!-- Bootstrap 核心 JavaScript 文件 -->
+<script
+	src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!--jquery.validate-->
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/message.js"></script>
 <style type="text/css">
 body {
 	background: url(img/login.jpg) no-repeat;
@@ -130,10 +68,9 @@ input[type="text"],input[type="password"] {
 	padding-left: 21px;
 }
 </style>
-
 </head>
-
 <body>
+
 	<!-- 导航栏  -->
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
@@ -149,94 +86,88 @@ input[type="text"],input[type="password"] {
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="start.jsp">主页</a>
-				</li>
+				<li class="active"><a href="start.jsp">主页</a></li>
 				<li><a href="login.jsp"> <%
- 	Admin admin = (Admin)session.getAttribute("admin");
- 	User user = (User) session.getAttribute("user");
- 	if(admin != null)
- 			response.sendRedirect("admin/bookManager.jsp");
- 	if (user != null)
- 			response.sendRedirect("user.jsp");
- 	else
- 			out.print("登录/注册");
- 		
- %> </a>
-				</li>
-				<li><a href="about.jsp">关于</a>
-				</li>
+         Admin admin = (Admin) session.getAttribute("admin");
+         User user = (User) session.getAttribute("user");
+         if (admin != null)
+                 response.sendRedirect("admin/bookManager.jsp");
+         if (user != null)
+                 response.sendRedirect("user.jsp");
+         else
+                 out.print("登录/注册");
+ %> </a></li>
+				<li><a href="about.jsp">关于</a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->
 	</div>
 	</nav>
 
-		<div class="container">
-			<div class="form row">
-				<form class="form-horizontal col-sm-offset-3 col-md-offset-3"
-					id="login_form" method="post">
-					<h3 class="form-title">Login to your account</h3>
-					<div class="col-sm-9 col-md-9">
-						<div class="form-group">
-							<i class="fa fa-user fa-lg"></i> <input
-								class="form-control required" type="text" placeholder="Username"
-								name="user.username" autofocus="autofocus" maxlength="20" />
-						</div>
-						<div class="form-group">
-							<i class="fa fa-lock fa-lg"></i> <input
-								class="form-control required" type="password"
-								placeholder="Password" name="user.password" maxlength="8" />
-						</div>
-						<div class="form-group">
-							<label class="checkbox"> <input type="checkbox"
-								name="remember" value="1" /> Remember me </label>
-							<hr />
-							<a href="javascript:;" id="register_btn" class="">Create an
-								account</a>
-						</div>
-						<div class="form-group">
-							<input type="submit" id="login_btn"
-								class="btn btn-success pull-right" value="Login "  onclick() = "checkData()" />
-						</div>
+	<div class="container">
+		<div class="form row">
+			<form action="user_login" class="form-horizontal col-sm-offset-3 col-md-offset-3"
+				id="login_form">
+				<h3 class="form-title">Login to your account</h3>
+				<div class="col-sm-9 col-md-9">
+					<div class="form-group">
+						<i class="fa fa-user fa-lg"></i> <input
+							class="form-control required" type="text" placeholder="Username"
+							name="user.username" autofocus="autofocus" maxlength="20" />
 					</div>
-				</form>
-			</div>
-
-			<div class="form row">
-				<form class="form-horizontal col-sm-offset-3 col-md-offset-3"
-					name="register_form" id="register_form" >
-					<h3 class="form-title">Login to your account</h3>
-					<div class="col-sm-9 col-md-9">
-						<div class="form-group">
-							<i class="fa fa-user fa-lg"></i> <input
-								class="form-control required" type="text" placeholder="Username"
-								name="user.username" autofocus="autofocus" />
-						</div>
-						<div class="form-group">
-							<i class="fa fa-lock fa-lg"></i> <input
-								class="form-control required" type="password"
-								placeholder="Password" id="register_password"
-								name="user.password" />
-						</div>
-						<div class="form-group">
-							<i class="fa fa-check fa-lg"></i> <input
-								class="form-control required" type="password"
-								placeholder="Re-type Your Password" name="rpassword" />
-						</div>
-						<div class="form-group">
-							<i class="fa fa-envelope fa-lg"></i> <input
-								class="form-control eamil" type="text" placeholder="Email"
-								name="user.email" />
-						</div>
-						<div class="form-group">
-							<input type="button" id="reg_btn"
-								class="btn btn-success pull-right"  onclick()="re()" value="Sign Up " /> <input
-								type="button" class="btn btn-info pull-left" id="back_btn"
-								value="Back" />
-						</div>
+					<div class="form-group">
+						<i class="fa fa-lock fa-lg"></i> <input
+							class="form-control required" type="password"
+							placeholder="Password" name="user.password" maxlength="8" />
 					</div>
-				</form>
-			</div>
+					<div class="form-group">
+						<label class="checkbox"> <input type="checkbox"
+							name="remember" value="1" /> Remember me </label>
+						<hr />
+						<a href="javascript:;" id="register_btn" class="">Create an
+							account</a>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-success pull-right"
+							value="Login " />
+					</div>
+				</div>
+			</form>
 		</div>
-		<script type="text/javascript" src="js/main.js"></script></body>
-</html>
+
+		<div class="form row">
+			<form class="form-horizontal col-sm-offset-3 col-md-offset-3"
+				id="register_form" action ="user_register">
+				<h3 class="form-title">Login to your account</h3>
+				<div class="col-sm-9 col-md-9">
+					<div class="form-group">
+						<i class="fa fa-user fa-lg"></i> <input
+							class="form-control required" type="text" placeholder="Username"
+							name="user.username" autofocus="autofocus" />
+					</div>
+					<div class="form-group">
+						<i class="fa fa-lock fa-lg"></i> <input
+							class="form-control required" type="password"
+							placeholder="Password" id="register_password" name="user.password" />
+					</div>
+					<div class="form-group">
+						<i class="fa fa-check fa-lg"></i> <input
+							class="form-control required" type="password"
+							placeholder="Re-type Your Password" name="rpassword" />
+					</div>
+					<div class="form-group">
+						<i class="fa fa-envelope fa-lg"></i> <input
+							class="form-control eamil" type="text" placeholder="Email"
+							name="user.email" />
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-success pull-right"
+							value="Sign Up " /> <input type="submit"
+							class="btn btn-info pull-left" id="back_btn" value="Back" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/login.js"></script>
+</body>
