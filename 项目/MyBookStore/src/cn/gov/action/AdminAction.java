@@ -172,10 +172,9 @@ public class AdminAction {
         //封号和解封号
         public String kickAndUnkick()
         {
-                if(id != null) System.out.println(id);
-                else System.out.println("null");
                 User u = userService.getUserById(id);  //得到user
                 userService.kickAndUnkick(u);  //解封号
+                System.out.println(111);
                 return userManager();
         }
 

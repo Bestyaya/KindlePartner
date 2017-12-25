@@ -58,7 +58,7 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	//根据id得到user
 	public User getUserById(Integer id)
 	{
-	        String hql = String.format("from User as user where id == "+id);
+	        String hql = String.format("from User as user where id = '"+id+"'");
 	        Session session = HibernateSessionFactory.getSession();
                 Query q = session.createQuery(hql);
                 
@@ -68,7 +68,8 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
 	// 更改用户的状态
 	public void kickAndUnkick(User user)
 	{
-	        if(user.getId() == 1) user.setId(0);
+	        System.out.println(user.getState());
+	        if(user.getState() == 1) user.setId(0);
 	        else user.setId(1);
 	        getHibernateTemplate().update(user);
 	}
